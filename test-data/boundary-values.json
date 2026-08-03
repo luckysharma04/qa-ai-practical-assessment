@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "generatedAt": "2026-08-03T10:20:01.239Z",
+    "purpose": "Boundary and edge-case inputs"
+  },
+  "registration": {
+    "passwordMinValid": "TestPass1!",
+    "passwordBelowMin": "Test1!",
+    "emailMaxLength": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com",
+    "phoneBoundary": "1234567890",
+    "dobFuture": "2099-01-01",
+    "dobMinAge": "2010-01-01"
+  },
+  "cart": {
+    "quantityZero": 0,
+    "quantityNegative": -1,
+    "quantityLarge": 9999,
+    "quantityNonNumeric": "abc",
+    "rapidAddClicks": 3
+  },
+  "checkout": {
+    "unicodeStreet": "straße 42 🏠",
+    "emojiCity": "Test🏙️",
+    "specialCharsPostal": "!!!",
+    "assessmentPostalValid": "1234AA",
+    "whitespaceOnlyStreet": "   "
+  },
+  "strings": {
+    "empty": "",
+    "whitespace": "   ",
+    "singleChar": "A",
+    "longString": "Verbum magni aegre. Tenuis agnosco comprehendo capillus tredecim. Coaegresco placeat nihil harum aliqua taedium ullus.\nDecor reiciendis corpus supra. Ago cornu viduo taceo absorbeo apparatus adimpleo communis. Venustas conatus ante depraedor centum.\nArbitro vinitor sursum. Demitto cursus celer crastinus caste. Corroboro aequus venia qui concedo placeat.",
+    "unicode": "日本語テスト",
+    "sqlLike": "%_;--"
+  },
+  "invoice": {
+    "confirmClicksRequired": 2,
+    "confirmClicksSingle": 1
+  },
+  "addresses": {
+    "minValid": {
+      "street": "A",
+      "city": "B",
+      "state": "FL",
+      "country": "TG",
+      "postalCode": "1"
+    },
+    "maxLike": {
+      "street": "acquiro demoror accedo studio adfero contabesco depereo stabilis uter convoco perspiciatis attonbitus tabella suspendo a",
+      "city": "Hegmannberg",
+      "state": "Kansas",
+      "country": "TG",
+      "postalCode": "1234AA"
+    }
+  }
+}

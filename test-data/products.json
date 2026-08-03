@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "generatedAt": "2026-08-03T10:20:01.228Z",
+    "source": "@faker-js/faker + Toolshop catalog patterns",
+    "note": "Product IDs are dynamic on public SUT; use GET /products or UI data-test product-* at runtime."
+  },
+  "searchTerms": {
+    "valid": [
+      "Modern",
+      "hammer",
+      "saw",
+      "drill",
+      "Generic"
+    ],
+    "invalid": [
+      "",
+      "   ",
+      "%",
+      "@#$",
+      "zzznonexistentproduct999"
+    ]
+  },
+  "syntheticCatalogItems": [
+    {
+      "id": "synthetic-product-1",
+      "name": "Refined Ceramic Bacon",
+      "description": "Featuring Zirconium-enhanced technology, our Soap offers unparalleled candid performance",
+      "price": 288.75,
+      "category": "Music",
+      "brand": "Wehner, Ziemann and Collier",
+      "inStock": true
+    },
+    {
+      "id": "synthetic-product-2",
+      "name": "Sleek Marble Bacon",
+      "description": "Experience the silver brilliance of our Shirt, perfect for excitable environments",
+      "price": 60.19,
+      "category": "Industrial",
+      "brand": "Funk, Ziemann and Collins",
+      "inStock": true
+    },
+    {
+      "id": "synthetic-product-3",
+      "name": "Licensed Granite Mouse",
+      "description": "Featuring Gadolinium-enhanced technology, our Car offers unparalleled serene performance",
+      "price": 425.12,
+      "category": "Games",
+      "brand": "MacGyver LLC",
+      "inStock": false
+    },
+    {
+      "id": "synthetic-product-4",
+      "name": "Awesome Ceramic Soap",
+      "description": "The green Fish combines Denmark aesthetics with Indium-based durability",
+      "price": 280.49,
+      "category": "Shoes",
+      "brand": "Weimann, Turcotte and Becker",
+      "inStock": false
+    },
+    {
+      "id": "synthetic-product-5",
+      "name": "Electronic Bamboo Hat",
+      "description": "Klein LLC's most advanced Pizza technology increases harmful capabilities",
+      "price": 345.19,
+      "category": "Toys",
+      "brand": "Hermann - Dickens",
+      "inStock": false
+    }
+  ],
+  "filterExamples": {
+    "ecoFriendly": true,
+    "sortOptions": [
+      "Name (A - Z)",
+      "Price (Low - High)",
+      "Price (High - Low)"
+    ]
+  }
+}

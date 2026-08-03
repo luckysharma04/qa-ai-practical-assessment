@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2026-08-03T10:20:01.242Z",
+  "generator": "test-data/generate-test-data.js",
+  "files": [
+    "users-valid.json",
+    "addresses.json",
+    "products.json",
+    "users-invalid.json",
+    "negative-data.json",
+    "boundary-values.json",
+    "users.json",
+    "billing.json",
+    "invoice-payload.example.json"
+  ]
+}

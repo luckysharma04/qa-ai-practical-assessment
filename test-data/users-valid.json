@@ -1,0 +1,191 @@
+{
+  "meta": {
+    "generatedAt": "2026-08-03T10:20:01.195Z",
+    "source": "@faker-js/faker",
+    "purpose": "Valid users for registration, login, profile"
+  },
+  "staticSutAccounts": {
+    "defaultCustomer": {
+      "email": "customer@practicesoftwaretesting.com",
+      "password": "welcome01",
+      "role": "user"
+    },
+    "secondaryCustomer": {
+      "email": "customer2@practicesoftwaretesting.com",
+      "password": "welcome01",
+      "role": "user"
+    },
+    "adminUser": {
+      "email": "admin@practicesoftwaretesting.com",
+      "password": "welcome01",
+      "role": "admin"
+    }
+  },
+  "validUsers": [
+    {
+      "id": "user-valid-1",
+      "description": "Valid registration and login user",
+      "firstName": "Ceasar",
+      "lastName": "Spencer",
+      "email": "testuser_1785752401198@example.com",
+      "password": "TestPass123!",
+      "dob": "1983-04-10",
+      "phone": "(990) 714-2751",
+      "address": {
+        "street": "9109 The Mews",
+        "houseNumber": "609",
+        "city": "Fort Kariane",
+        "state": "Kansas",
+        "country": "United States of America",
+        "postalCode": "42954"
+      },
+      "apiRegisterPayload": {
+        "first_name": "Ceasar",
+        "last_name": "Spencer",
+        "email": "testuser_1785752401198@example.com",
+        "password": "TestPass123!",
+        "dob": "2001-04-07",
+        "phone": "1-992-785-1910 x0438",
+        "address": {
+          "street": "9109 The Mews",
+          "city": "Fort Kariane",
+          "state": "Kansas",
+          "country": "United States of America",
+          "postal_code": "42954"
+        }
+      }
+    },
+    {
+      "id": "user-valid-2",
+      "description": "Valid registration and login user",
+      "firstName": "Quinn",
+      "lastName": "Grimes",
+      "email": "testuser_1785752401212@example.com",
+      "password": "TestPass123!",
+      "dob": "2007-01-14",
+      "phone": "226.584.3224",
+      "address": {
+        "street": "31792 Church Street",
+        "houseNumber": "689",
+        "city": "Royal Oak",
+        "state": "Illinois",
+        "country": "United States of America",
+        "postalCode": "66598"
+      },
+      "apiRegisterPayload": {
+        "first_name": "Quinn",
+        "last_name": "Grimes",
+        "email": "testuser_1785752401212@example.com",
+        "password": "TestPass123!",
+        "dob": "1989-08-09",
+        "phone": "729.323.2821 x48966",
+        "address": {
+          "street": "31792 Church Street",
+          "city": "Royal Oak",
+          "state": "Illinois",
+          "country": "United States of America",
+          "postal_code": "66598"
+        }
+      }
+    },
+    {
+      "id": "user-valid-3",
+      "description": "Valid registration and login user",
+      "firstName": "Vito",
+      "lastName": "Cassin",
+      "email": "testuser_1785752401213@example.com",
+      "password": "TestPass123!",
+      "dob": "1974-04-20",
+      "phone": "984-628-2983",
+      "address": {
+        "street": "12624 Lindgren Mountain",
+        "houseNumber": "801",
+        "city": "Hughcester",
+        "state": "Oklahoma",
+        "country": "United States of America",
+        "postalCode": "06375"
+      },
+      "apiRegisterPayload": {
+        "first_name": "Vito",
+        "last_name": "Cassin",
+        "email": "testuser_1785752401213@example.com",
+        "password": "TestPass123!",
+        "dob": "1986-02-17",
+        "phone": "689-501-6348 x47654",
+        "address": {
+          "street": "12624 Lindgren Mountain",
+          "city": "Hughcester",
+          "state": "Oklahoma",
+          "country": "United States of America",
+          "postal_code": "06375"
+        }
+      }
+    },
+    {
+      "id": "user-valid-4",
+      "description": "Valid registration and login user",
+      "firstName": "Marjorie",
+      "lastName": "Prohaska",
+      "email": "testuser_1785752401215@example.com",
+      "password": "TestPass123!",
+      "dob": "1963-10-09",
+      "phone": "(595) 442-6810 x81612",
+      "address": {
+        "street": "228 Jayce Land",
+        "houseNumber": "157",
+        "city": "Donniestad",
+        "state": "Idaho",
+        "country": "United States of America",
+        "postalCode": "42029"
+      },
+      "apiRegisterPayload": {
+        "first_name": "Marjorie",
+        "last_name": "Prohaska",
+        "email": "testuser_1785752401215@example.com",
+        "password": "TestPass123!",
+        "dob": "1963-12-23",
+        "phone": "(816) 919-6740 x306",
+        "address": {
+          "street": "228 Jayce Land",
+          "city": "Donniestad",
+          "state": "Idaho",
+          "country": "United States of America",
+          "postal_code": "42029"
+        }
+      }
+    },
+    {
+      "id": "user-valid-5",
+      "description": "Valid registration and login user",
+      "firstName": "Jed",
+      "lastName": "Marks",
+      "email": "testuser_1785752401216@example.com",
+      "password": "TestPass123!",
+      "dob": "1995-09-01",
+      "phone": "949-627-2983 x3724",
+      "address": {
+        "street": "358 N Main",
+        "houseNumber": "547",
+        "city": "Delray Beach",
+        "state": "Indiana",
+        "country": "United States of America",
+        "postalCode": "37882"
+      },
+      "apiRegisterPayload": {
+        "first_name": "Jed",
+        "last_name": "Marks",
+        "email": "testuser_1785752401216@example.com",
+        "password": "TestPass123!",
+        "dob": "1987-10-06",
+        "phone": "(491) 467-4058",
+        "address": {
+          "street": "358 N Main",
+          "city": "Delray Beach",
+          "state": "Indiana",
+          "country": "United States of America",
+          "postal_code": "37882"
+        }
+      }
+    }
+  ]
+}

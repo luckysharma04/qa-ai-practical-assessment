@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "generatedAt": "2026-08-03T10:20:01.232Z",
+    "source": "@faker-js/faker + known SUT rules"
+  },
+  "login": [
+    {
+      "id": "invalid-login-wrong-password",
+      "email": "customer@practicesoftwaretesting.com",
+      "password": "wrongpassword99",
+      "expected": "Login rejected; no session"
+    },
+    {
+      "id": "invalid-login-unknown-email",
+      "email": "Lacey_Hintz@hotmail.com",
+      "password": "TestPass123!",
+      "expected": "Login rejected; no session"
+    },
+    {
+      "id": "invalid-login-empty-password",
+      "email": "customer@practicesoftwaretesting.com",
+      "password": "",
+      "expected": "Validation error or login rejected"
+    },
+    {
+      "id": "invalid-login-email-spaces",
+      "email": "  customer@practicesoftwaretesting.com  ",
+      "password": "welcome01",
+      "expected": "Trimmed success or validation error (document actual)"
+    }
+  ],
+  "registration": [
+    {
+      "id": "invalid-register-duplicate-email",
+      "email": "customer@practicesoftwaretesting.com",
+      "password": "TestPass123!",
+      "expected": "Duplicate email error"
+    },
+    {
+      "id": "invalid-register-bad-email",
+      "email": "not-an-email",
+      "password": "TestPass123!",
+      "expected": "Email format validation error"
+    },
+    {
+      "id": "invalid-register-weak-password",
+      "email": "Else_Bartell0@yahoo.com",
+      "password": "weak",
+      "expected": "Password policy validation error"
+    },
+    {
+      "id": "invalid-register-missing-first-name",
+      "email": "Maverick_Hartmann-Treutel@hotmail.com",
+      "password": "TestPass123!",
+      "firstName": "",
+      "expected": "Required field validation error"
+    }
+  ],
+  "duplicateEmailSample": "existing_1785752401232@example.com"
+}

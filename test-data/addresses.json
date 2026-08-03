@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "generatedAt": "2026-08-03T10:20:01.226Z",
+    "source": "@faker-js/faker"
+  },
+  "assessmentReference": {
+    "id": "billing-assessment-reference",
+    "description": "Assessment invoice POST example",
+    "billing_street": "Zoey Shore",
+    "billing_city": "Hesselbury",
+    "billing_state": "Florida",
+    "billing_country": "TG",
+    "billing_postal_code": "1234AA",
+    "payment_method": "cash-on-delivery",
+    "payment_details": {},
+    "ui": {
+      "street": "Zoey Shore",
+      "city": "Hesselbury",
+      "state": "Florida",
+      "country": "TG",
+      "postalCode": "1234AA"
+    }
+  },
+  "validAddresses": [
+    {
+      "id": "address-valid-1",
+      "description": "Valid billing / registration address",
+      "street": "5752 E Bridge Street",
+      "houseNumber": "270",
+      "city": "Bradyburgh",
+      "state": "Oregon",
+      "country": "United States of America",
+      "countryCode": "NF",
+      "postalCode": "77286",
+      "ui": {
+        "street": "5752 E Bridge Street",
+        "city": "Bradyburgh",
+        "state": "Oregon",
+        "country": "NF",
+        "postalCode": "77286",
+        "houseNumber": "270"
+      },
+      "api": {
+        "billing_street": "5752 E Bridge Street",
+        "billing_city": "Bradyburgh",
+        "billing_state": "Oregon",
+        "billing_country": "NF",
+        "billing_postal_code": "77286"
+      }
+    },
+    {
+      "id": "address-valid-2",
+      "description": "Valid billing / registration address",
+      "street": "82621 Hazle Canyon",
+      "houseNumber": "491",
+      "city": "Danielworth",
+      "state": "Nebraska",
+      "country": "United States of America",
+      "countryCode": "PR",
+      "postalCode": "21654",
+      "ui": {
+        "street": "82621 Hazle Canyon",
+        "city": "Danielworth",
+        "state": "Nebraska",
+        "country": "PR",
+        "postalCode": "21654",
+        "houseNumber": "491"
+      },
+      "api": {
+        "billing_street": "82621 Hazle Canyon",
+        "billing_city": "Danielworth",
+        "billing_state": "Nebraska",
+        "billing_country": "PR",
+        "billing_postal_code": "21654"
+      }
+    },
+    {
+      "id": "address-valid-3",
+      "description": "Valid billing / registration address",
+      "street": "382 Commercial Road",
+      "houseNumber": "60",
+      "city": "Waukegan",
+      "state": "Arkansas",
+      "country": "United States of America",
+      "countryCode": "GR",
+      "postalCode": "94752",
+      "ui": {
+        "street": "382 Commercial Road",
+        "city": "Waukegan",
+        "state": "Arkansas",
+        "country": "GR",
+        "postalCode": "94752",
+        "houseNumber": "60"
+      },
+      "api": {
+        "billing_street": "382 Commercial Road",
+        "billing_city": "Waukegan",
+        "billing_state": "Arkansas",
+        "billing_country": "GR",
+        "billing_postal_code": "94752"
+      }
+    },
+    {
+      "id": "address-valid-4",
+      "description": "Valid billing / registration address",
+      "street": "85091 Prospect Place",
+      "houseNumber": "7",
+      "city": "Lake Myrtice",
+      "state": "Wyoming",
+      "country": "United States of America",
+      "countryCode": "ZW",
+      "postalCode": "50504",
+      "ui": {
+        "street": "85091 Prospect Place",
+        "city": "Lake Myrtice",
+        "state": "Wyoming",
+        "country": "ZW",
+        "postalCode": "50504",
+        "houseNumber": "7"
+      },
+      "api": {
+        "billing_street": "85091 Prospect Place",
+        "billing_city": "Lake Myrtice",
+        "billing_state": "Wyoming",
+        "billing_country": "ZW",
+        "billing_postal_code": "50504"
+      }
+    },
+    {
+      "id": "address-valid-5",
+      "description": "Valid billing / registration address",
+      "street": "477 Cartwright Gardens",
+      "houseNumber": "695",
+      "city": "Port Ken",
+      "state": "Colorado",
+      "country": "United States of America",
+      "countryCode": "GT",
+      "postalCode": "54161",
+      "ui": {
+        "street": "477 Cartwright Gardens",
+        "city": "Port Ken",
+        "state": "Colorado",
+        "country": "GT",
+        "postalCode": "54161",
+        "houseNumber": "695"
+      },
+      "api": {
+        "billing_street": "477 Cartwright Gardens",
+        "billing_city": "Port Ken",
+        "billing_state": "Colorado",
+        "billing_country": "GT",
+        "billing_postal_code": "54161"
+      }
+    }
+  ]
+}

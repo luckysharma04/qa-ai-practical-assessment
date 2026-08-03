@@ -1,0 +1,113 @@
+{
+  "meta": {
+    "generatedAt": "2026-08-03T10:20:01.236Z",
+    "purpose": "Negative UI and API test payloads"
+  },
+  "checkout": [
+    {
+      "id": "negative-empty-cart",
+      "scenario": "Checkout with empty cart",
+      "precondition": "Cart has zero items",
+      "expected": "Checkout blocked or error shown"
+    },
+    {
+      "id": "negative-missing-billing-street",
+      "billing": {
+        "street": "",
+        "city": "Raeland",
+        "state": "New Jersey",
+        "country": "TG",
+        "postalCode": "99273-3274"
+      },
+      "expected": "Billing validation error"
+    },
+    {
+      "id": "negative-missing-payment-method",
+      "scenario": "Proceed without selecting payment method",
+      "expected": "Checkout blocked"
+    },
+    {
+      "id": "negative-single-confirm-invoice",
+      "scenario": "Click finish/confirm only once",
+      "expected": "Invoice not complete in My Invoices"
+    }
+  ],
+  "api": [
+    {
+      "id": "negative-api-no-token",
+      "headers": {},
+      "expectedStatus": [
+        401,
+        403
+      ]
+    },
+    {
+      "id": "negative-api-invalid-token",
+      "headers": {
+        "Authorization": "Bearer invalid.token.value"
+      },
+      "expectedStatus": [
+        401,
+        403
+      ]
+    },
+    {
+      "id": "negative-api-invalid-cart-id",
+      "invoicePayload": {
+        "billing_street": "Zoey Shore",
+        "billing_city": "Hesselbury",
+        "billing_state": "Florida",
+        "billing_country": "TG",
+        "billing_postal_code": "1234AA",
+        "payment_method": "cash-on-delivery",
+        "cart_id": "invalid-cart-id-000",
+        "payment_details": {}
+      },
+      "expectedStatus": [
+        400,
+        404,
+        422
+      ]
+    },
+    {
+      "id": "negative-api-missing-billing-field",
+      "invoicePayload": {
+        "billing_city": "Hesselbury",
+        "payment_method": "cash-on-delivery",
+        "cart_id": "<dynamic>",
+        "payment_details": {}
+      },
+      "expectedStatus": [
+        400,
+        422
+      ]
+    },
+    {
+      "id": "negative-api-wrong-payment-method",
+      "invoicePayload": {
+        "billing_street": "Zoey Shore",
+        "billing_city": "Hesselbury",
+        "billing_state": "Florida",
+        "billing_country": "TG",
+        "billing_postal_code": "1234AA",
+        "payment_method": "invalid-method",
+        "cart_id": "<dynamic>",
+        "payment_details": {}
+      },
+      "expectedStatus": [
+        400,
+        422
+      ]
+    }
+  ],
+  "search": [
+    {
+      "query": "'; DROP TABLE--",
+      "expected": "No crash; safe handling"
+    },
+    {
+      "query": "Nhs829yoiu7SkyfkurHLSnNxL0UMP80BpiU03fACOPNlsYM3hDhpb1etJT1YDBwl8AqTrxsmdKkjjJbVSKslE52iQDquzUcnqP1R0BIXg9gBEl7uQcYLiGWT6kmGHNpKMALwNo8dpexvDOhkce6C6T",
+      "expected": "Long input handled gracefully"
+    }
+  ]
+}
