@@ -14,6 +14,8 @@
     "test:ui:regression": "npm run test:ui:regression --prefix PrismStructure",
     "test:api:smoke": "npm run test:api:smoke --prefix PrismStructure",
     "test:api:regression": "npm run test:api:regression --prefix PrismStructure",
-    "report": "npm run report --prefix PrismStructure"
+    "report": "npm run report --prefix PrismStructure",
+    "report:html": "npm run report:html --prefix PrismStructure",
+    "report:copy": "npm run report:copy --prefix PrismStructure"
   }
 }

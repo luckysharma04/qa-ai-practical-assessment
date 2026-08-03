@@ -1,180 +1,137 @@
 # Project Info — QA AI Practical Assessment
 
-**Primary AI Tool(s) Used:** Cursor AI (Auto / Composer 2.5 for planning; Sonnet for automation)
+| Field | Value |
+|-------|-------|
+| **Primary AI tool** | Cursor AI (Composer / Agent mode) |
+| **Application under test** | Practice Software Testing Toolshop — Checkout & Application Flow (Sprint 5) |
+| **Assessment start date** | 29 July 2026 |
+| **Submission date** | 07 August 2026 |
 
-**Application Under Test:** Practice Software Testing Toolshop – Checkout & Application Flow
+**SUT URLs**
 
-**Assessment Start Date:** 29 July'26
-
-**Submission Date:** 07 Aug'26
+| Layer | URL |
+|-------|-----|
+| UI | https://practicesoftwaretesting.com/ |
+| API | https://api.practicesoftwaretesting.com |
+| API documentation | https://api.practicesoftwaretesting.com/api/documentation |
 
 ---
 
 ## Project Summary
 
-This project validates the **Practice Software Testing Toolshop** (Sprint 5) — a small B2C ecommerce application for tools and hardware — across manual, UI, and API test tiers. The primary focus is the **customer purchase lifecycle**: user registration and login, product discovery, cart management (including multi-item and quantity updates), Cash on Delivery checkout, invoice generation (with the application's **double-confirm** UX), and verification under **My Invoices**.
+This submission validates the **Practice Software Testing Toolshop** — a B2C ecommerce application for tools and hardware — across **manual**, **UI**, and **API** test tiers. The primary business focus is the **customer purchase lifecycle**: registration and login, product discovery, cart management, **Cash on Delivery (COD)** checkout, invoice generation (including the application's **double-confirm** UX on the UI), and verification under **My Invoices**.
 
-Automation is implemented with **Playwright** using the **Prism Framework**, assisted by **Cursor AI** for requirement analysis, test design, automation structure, and debugging. Test coverage is organized into **@Smoke** (fast health checks) and **@Regression** (extended functional depth), with 5–8 test cases per tier (manual, UI, API) as scoped by the assessment.
+Deliverables include:
 
-**SUT URLs:**
-- UI: https://practicesoftwaretesting.com/
-- API: https://api.practicesoftwaretesting.com/api/documentation
+- **8 manual functional test cases** (3 Smoke + 5 Regression) in `FunctionalTestCase/FunctionalTestCase.csv`
+- **12 UI automation specs** (7 Smoke + 5 Regression) in `PrismStructure/Tests/ui/`
+- **8 API automation specs** (3 Smoke + 5 Regression) in `PrismStructure/API/tests/`
+- Supporting artifacts: test plan, risk analysis, RTM, AI prompt history, execution reports, and README
+
+Automation uses **Playwright** with a **Prism-style JavaScript framework** (page objects, API service layer, fixtures, reusable flows). Tests are tagged `@Smoke`, `@Regression`, `@UI`, and `@API` for filtered execution via Playwright projects and npm scripts.
 
 ---
 
 ## Tools Used
 
-| Category | Tool |
-|----------|------|
+| Category | Tool / approach |
+|----------|-----------------|
 | AI assistant | Cursor AI |
-| UI automation | Playwright (Prism Framework) |
-| API automation | Playwright (API request context) |
-| Language | JavaScript / TypeScript |
-| Runtime | Node.js, npm |
+| UI automation | Playwright + Page Object Model |
+| API automation | Playwright `APIRequestContext` |
+| Language | JavaScript (Node.js) |
+| Runtime | Node.js 18+, npm |
 | Browser | Chromium (default) |
-| Test data | Faker / dynamic IDs / timestamp-based emails |
-| Version control | Git (iterative commits) |
-| Reporting | Playwright HTML report / execution evidence |
+| Test data | JSON fixtures, `@faker-js/faker`, timestamp-based emails |
+| Assertions | Centralized UI/API helpers + JSON schema validators |
+| Reporting | HTML, JSON, JUnit, custom failure logs, screenshots, video, trace |
+| Version control | Git (iterative commits per phase) |
+| Documentation | Markdown (project-info, test-plan, RTM, README) |
 
 ---
 
-## Setup Summary
+## AI Usage
 
-### 1. How you provide project and system-under-test context to the tool
+Cursor AI was used throughout the assessment as a **collaborative QA partner** — not as an unchecked code generator. The workflow followed structured phases: understand requirements, design tests, implement automation, validate against the live SUT, debug failures, and document outcomes in `ai-prompts/`.
 
-- Share the assessment PDF and SUT URLs (UI + Swagger) as the initial context anchor.
-- Reference **UI AC1/AC2** and **API AC1/AC2** explicitly when prompting.
-- Point Cursor to existing Prism/Playwright structure, page objects, and config files before asking for new specs.
-- Summarize prior chat sessions into `ai-prompts/` to avoid re-explaining context in every message.
-- Use focused, single-task chats (Caveman approach): one flow per session (e.g., login negatives only, invoice API chain only).
+### How project and SUT context is provided
 
-### 2. How you use AI for requirement analysis
+- Shared the assessment brief, SUT URLs, and acceptance criteria (UI-AC1/AC2, API-AC1/AC2) as the initial anchor.
+- Referenced live Swagger documentation and UI network traffic when validating API contracts.
+- Pointed Cursor to existing framework files (`Pages/`, `Fixtures/`, `Config/`) before requesting new specs to preserve conventions.
+- Used **focused, single-task sessions** (e.g., invoice double-confirm only, API cart endpoint probing only) to reduce context drift.
+- Summarized completed work into `ai-prompts/` so later sessions did not repeat full context.
 
-- Prompt AI to extract business flows, actors, features, dependencies, risks, and scope from the assessment doc and live SUT exploration.
-- Cross-check AI output against Swagger (`/api/documentation`) and manual UI exploration (network tab).
-- Validate assumptions (shared DB, double-confirm invoice, COD-only core path) before locking test scope.
-- Document findings in this `project-info.md` Requirement Analysis section.
+### AI role by activity
 
-### 3. How you use AI for test planning and strategy (UI vs API, smoke vs regression)
+| Activity | AI contribution | Human oversight |
+|----------|-----------------|-----------------|
+| Requirement analysis | Flow extraction, risk ideas, scope boundaries | Verified against live SUT and Swagger |
+| Test planning | Smoke/regression split, case counts, RTM mapping | Enforced 5–8 case limit per tier |
+| Manual test design | CSV steps, preconditions, expected results | Reviewed for AC traceability |
+| UI automation | Page objects, fixtures, spec scaffolding | Reviewed locators, waits, assessment UX rules |
+| API automation | Service layer, E2E chain, payload templates | Probed endpoints; corrected wrong paths |
+| Test data | Faker patterns, negative payloads | No real PII; public SUT credentials only |
+| Debugging | Trace interpretation, locator fixes | Re-ran suites; confirmed root cause |
+| Documentation | README, project-info drafts | Edited for accuracy and submission tone |
 
-- **UI:** End-user journeys, visibility, double-confirm UX, form validation, My Invoices.
-- **API:** Contract validation, state machine (register → cart → invoice), faster setup/teardown, negative token/payload tests.
-- **@Smoke:** Login, single add-to-cart, minimal COD checkout, API token + cart + invoice chain (~15–30 min).
-- **@Regression:** Full AC1 + AC2 paths, multi-cart, filters/search, billing negatives, auth negatives.
-- API used for data setup when UI login is slow; UI used when UX-specific behavior (double confirm) must be verified.
-
-### 4. How you use AI for manual test case design (functional, edge, negative, non-functional)
-
-- Generate CSV rows per flow: positive (happy path), negative (invalid login, empty cart, bad billing), edge (quantity boundaries, duplicate email).
-- Review AI cases against AC traceability — each case maps to UI-AC1/AC2 or API-AC1/AC2.
-- Add NFR-oriented manual checks where relevant (error message clarity, response time sanity).
-- Cap at 5–8 manual cases; prioritize P1 features first.
-
-### 5. How you use AI for automation design (framework choice, structure, data, reusable utilities)
-
-- Follow **Prism Framework** conventions: page objects, spec files, shared auth/cart/invoice helpers.
-- Tag specs with `@Smoke` and `@Regression`; separate commands in README.
-- Chain API calls for dynamic `cart_id` and `invoice_id` — no hard-coded IDs.
-- Reusable utilities: `login()`, `getBearerToken()`, `createCart()`, `addProductToCart()`, `generateInvoice()`.
-- Use Sonnet-tier model for page objects and spec files; lighter models for planning docs.
-
-### 6. How you validate and refine AI-generated test cases and scripts
-
-- Execute against live SUT; compare API responses to Swagger schemas.
-- Review assertions — AI often over-asserts or misses double-confirm step.
-- Run smoke first; fix failures before expanding regression.
-- Peer-style review: traceability matrix (requirement → case ID → spec name).
-- Record validation notes in `ai-prompts/test-design.md`.
-
-### 7. How you use AI for test data generation, environment assumptions, and API payloads
-
-- Unique registration emails: `testuser_<timestamp>@example.com` to avoid shared-DB collisions.
-- Default users for stable smoke: `customer@practicesoftwaretesting.com` / `welcome01`.
-- Invoice payload template with dynamic `cart_id` from prior POST /carts response.
-- Document environment assumptions: public Sprint 5 URLs, shared database, Cloudflare on UI.
-- Prompt history for test data captured in `ai-prompts/test-data.md`.
-
-### 8. How you use AI for debugging failing tests and interpreting logs
-
-- Share Playwright trace, screenshot, and API response body with Cursor.
-- Separate debugging chats per failure (e.g., TC-UI invoice double-confirm).
-- Use AI to suggest locator fixes, wait strategies, and auth header issues — then verify manually.
-- Log outcomes in `ai-prompts/automation-and-debugging.md` with Debugging Outcome field.
-
-### 9. What information you avoid sharing unnecessarily with AI tools
-
-- Real personal email, phone, or credentials beyond public SUT defaults.
-- Internal company secrets, VPN details, or production URLs unrelated to this SUT.
-- API keys or tokens from other systems.
-- Full execution logs with sensitive data — summarize errors instead.
-
-### 10. How you would reuse this QA workflow in a real project
-
-- Phase 1: Requirements + risk → `project-info.md` + ai-prompts/requirements-and-planning.md
-- Phase 2: Manual CSV + test-design prompts with validation notes
-- Phase 3: Smoke automation → regression automation (API before or parallel to UI)
-- Phase 4: Full suite run → execution evidence → README commands
-- Reuse: focused chats, summarize-to-md skill, traceability matrix, API setup for UI tests, iterative git commits per phase.
+Prompt history is maintained in `ai-prompts/` (requirements, test design, test data, automation/debugging, documentation).
 
 ---
 
 ## Requirement Analysis
 
-### Business Flow
+### Business context
 
-#### High-Level Context
+Toolshop is a **B2C ecommerce platform** for tools and hardware. Customers browse a catalog (with sustainability filters), build a cart, complete checkout with **Cash on Delivery**, and receive an invoice. The REST API mirrors the same commerce lifecycle for headless validation.
 
-Toolshop is a **B2C ecommerce platform** for tools and hardware. Customers discover products (with sustainability filters), build a cart, complete checkout using **Cash on Delivery (COD)**, and receive an invoice. The REST API mirrors the same commerce lifecycle for headless testing.
-
-#### Core Happy Path
+### Core happy path
 
 ```
-Discover Products → Authenticate → Add to Cart → Manage Cart → Checkout (COD) → Generate Invoice (×2 Confirm) → View My Invoices
+Discover Products → Authenticate → Add to Cart → Manage Cart → Checkout (COD) → Generate Invoice (×2 Confirm on UI) → View My Invoices
 ```
 
-| Step | Business Activity | UI | API |
+| Step | Business activity | UI | API |
 |------|-------------------|-----|-----|
-| 1 | Discover products (catalog, search, filters) | Home / listing | `GET /products`, `/categories`, `/brands` |
+| 1 | Discover products | Home / listing | `GET /products` |
 | 2 | Register or login | Register / Login | `POST /users/register`, `POST /users/login` |
-| 3 | View product details | Product detail | `GET /products/{id}` |
-| 4 | Add items to cart | Add to cart | `POST /carts`, add line items |
-| 5 | Update cart (quantity, remove) | Cart page | `PUT` cart items, `GET /carts/{id}` |
-| 6 | Checkout with billing | Checkout form | Billing fields in invoice payload |
-| 7 | Select Cash on Delivery | Payment selection | `payment_method: cash-on-delivery` |
-| 8 | Confirm invoice (**twice on UI**) | Confirm × 2 | `POST /invoices` |
+| 3 | View product details | Product page | `GET /products/{id}` |
+| 4 | Add items to cart | Add to cart | `POST /carts`, `POST /carts/{id}` |
+| 5 | Update cart quantity | Checkout / cart | `POST /carts/{id}` (increment) |
+| 6 | Checkout with billing | Checkout wizard | Billing fields in invoice payload |
+| 7 | Select Cash on Delivery | Payment step | `payment_method: cash-on-delivery` |
+| 8 | Confirm invoice (**twice on UI**) | Finish × 2 | `POST /invoices` |
 | 9 | View order history | My Invoices | `GET /invoices` |
 
-#### State Machine (API)
+### API state machine
 
 ```
 [User Created] → [Authenticated] → [Cart Created] → [Items Added] → [Cart Verified] → [Invoice Generated] → [Invoice Listed]
 ```
 
-#### Exception Flows
+### Exception flows
 
-| Flow | Description |
-|------|-------------|
+| Flow | Expected behavior |
+|------|-------------------|
 | Guest browse | Catalog without login; purchase requires auth |
-| Invalid login | Wrong credentials → error, no session/token |
-| Invalid registration | Duplicate email, weak password → rejected |
-| Empty cart checkout | Blocked or error |
-| Invalid billing | Missing/invalid fields → validation error |
-| Invalid API token | Protected endpoints reject request |
-| Invalid invoice request | Bad `cart_id` or payload → API error |
-
----
+| Invalid login | Error shown; no session / token |
+| Invalid registration | Duplicate email, weak password rejected |
+| Empty cart checkout | Checkout blocked or no proceed action |
+| Invalid billing | Validation error; proceed disabled |
+| Invalid bearer token | `401` / `403` on protected endpoints |
+| Invalid invoice payload | `400` / `422` / `404` with error body |
 
 ### Actors
 
-| Actor | Role | Auth Level |
-|-------|------|------------|
-| **Guest** | Browse catalog without login | None |
-| **Registered Customer** | Register, cart, checkout, invoices | Bearer token / session |
-| **Returning Customer** | Login, repeat purchase, view invoices | Bearer token / session |
-| **Admin** | Admin data, reports, DELETE ops | Admin bearer token |
-| **QA Engineer** | Execute manual + automated tests | Test accounts |
+| Actor | Role | Auth |
+|-------|------|------|
+| Guest | Browse catalog | None |
+| Registered customer | Register, cart, checkout, invoices | Bearer token / session |
+| Returning customer | Login, repeat purchase | Bearer token / session |
+| Admin | Admin operations (stretch) | Admin token |
+| QA engineer | Execute manual and automated tests | Test accounts |
 
-**Default test users (shared public environment):**
+**Default public test users**
 
 | User | Email | Password |
 |------|-------|----------|
@@ -182,146 +139,63 @@ Discover Products → Authenticate → Add to Cart → Manage Cart → Checkout 
 | Customer 2 | `customer2@practicesoftwaretesting.com` | `welcome01` |
 | Admin | `admin@practicesoftwaretesting.com` | `welcome01` |
 
----
-
-### Features
+### Features (priority)
 
 | ID | Feature | UI | API | Priority |
 |----|---------|-----|-----|----------|
 | F-01 | User registration | ✓ | ✓ | P1 |
-| F-02 | User login / logout | ✓ | ✓ | P1 |
-| F-03 | Profile view / update | ✓ | ✓ | P2 |
-| F-04 | Product catalog listing | ✓ | ✓ | P1 |
-| F-05 | Product search | ✓ | ✓ | P2 |
-| F-06 | Filter (category, brand, price, eco) | ✓ | ✓ | P2 |
-| F-07 | Sort (name, price, CO₂ rating) | ✓ | ✓ | P2 |
-| F-08 | Product detail view | ✓ | ✓ | P2 |
-| F-09 | Add to cart | ✓ | ✓ | P1 |
-| F-10 | Update cart quantity | ✓ | ✓ | P1 |
-| F-11 | Remove cart item | ✓ | ✓ | P2 |
-| F-12 | View cart | ✓ | ✓ | P1 |
-| F-13 | Checkout — billing details | ✓ | ✓ | P1 |
-| F-14 | Payment — Cash on Delivery | ✓ | ✓ | P1 |
-| F-15 | Invoice generation (double confirm UI) | ✓ | ✓ | P1 |
-| F-16 | My Invoices — list & detail | ✓ | ✓ | P1 |
-| F-17 | Contact / messages | ✓ | ✓ | P3 |
-| F-18 | Reports | — | ✓ | P3 |
-| F-19 | Brands / categories (read) | ✓ | ✓ | P3 |
-
-**Assessment AC mapping:**
-
-| AC | Features |
-|----|----------|
-| UI AC1 | F-01, F-02, F-03 |
-| UI AC2 | F-04–F-16 |
-| API AC1 | F-01, F-02, F-09, F-12 |
-| API AC2 | F-04, F-09–F-12, F-15, F-16 |
-
----
+| F-02 | Login / logout | ✓ | ✓ | P1 |
+| F-03 | Profile view | ✓ | — | P2 |
+| F-04 | Product catalog | ✓ | ✓ | P1 |
+| F-05 | Search / filter | ✓ | ✓ | P2 |
+| F-06 | Add to cart | ✓ | ✓ | P1 |
+| F-07 | Update cart quantity | ✓ | ✓ | P1 |
+| F-08 | Checkout billing | ✓ | ✓ | P1 |
+| F-09 | COD payment | ✓ | ✓ | P1 |
+| F-10 | Invoice generation | ✓ | ✓ | P1 |
+| F-11 | My Invoices | ✓ | ✓ | P1 |
 
 ### Dependencies
 
-#### Technical
-
 | Dependency | Impact if unavailable |
 |------------|------------------------|
-| UI: `practicesoftwaretesting.com` | All UI tests blocked |
-| API: `api.practicesoftwaretesting.com` | All API tests blocked |
-| OpenAPI / Swagger | Contract design blocked |
-| Cloudflare on UI | UI automation may flake |
-| Shared public database | Data collisions, flaky tests |
-| Playwright + Prism | Automation delivery blocked |
-| Node.js / npm | Cannot execute tests |
+| UI host (`practicesoftwaretesting.com`) | All UI tests blocked |
+| API host (`api.practicesoftwaretesting.com`) | All API tests blocked |
+| Swagger / OpenAPI | Contract design blocked |
+| Shared public database | Data collisions, flaky registration |
+| Playwright + Node.js | Automation cannot run |
 
-#### Functional / Data
+### Risks (summary)
 
-| Dependency | Required for |
-|------------|--------------|
-| Valid product IDs | Add to cart, checkout, invoice |
-| Login → `access_token` | Cart create, protected calls |
-| Valid `cart_id` with items | Invoice generation |
-| Billing payload fields | `POST /invoices` success |
-| `payment_method: cash-on-delivery` | COD checkout |
-| Authenticated session (UI) | Checkout, My Invoices |
+| ID | Risk | Mitigation |
+|----|------|------------|
+| R-01 | Shared DB collisions | Unique emails; dynamic registration |
+| R-02 | Cloudflare / UI flake | Retries; stable waits; single worker |
+| R-03 | Double-confirm invoice missed | Explicit `confirmInvoiceTwice()` in page object |
+| R-04 | Wrong API cart endpoint | Probed live API; `POST /carts/{id}` not `/items` |
+| R-05 | AI-generated wrong assertions | Schema validators + human review |
+| R-06 | Time box pressure | Smoke first; phased delivery |
 
----
+Full register: `qa-risk-analysis.md`.
 
-### Risks
+### In scope
 
-| ID | Risk | Probability | Impact | Mitigation |
-|----|------|-------------|--------|------------|
-| R-01 | Shared DB — duplicate users, stale carts | High | Medium | Unique emails; API setup/teardown |
-| R-02 | Cloudflare blocks headless UI | Medium | High | Retries; API setup fallback |
-| R-03 | Double-confirm invoice missed | Medium | High | Explicit test step in page object |
-| R-04 | Hard-coded cart/product IDs | High | High | Chain API calls; runtime IDs |
-| R-05 | Token expiry mid-suite | Low | Medium | Re-auth helper |
-| R-06 | AI wrong endpoints/assertions | Medium | High | Human review vs Swagger |
-| R-07 | Scope creep (messages, reports) | Medium | Medium | Stick to In Scope |
-| R-08 | Flaky filter/sort selectors | Medium | Medium | Resilient locators; API backup |
-| R-09 | Time box (5–10 hours) | High | Medium | Smoke first; phased delivery |
-| R-10 | PII in prompts/git | Low | High | Synthetic data only |
+- UI AC1: registration, login, profile, auth negatives
+- UI AC2: catalog, cart, COD checkout, double-confirm invoice, My Invoices
+- API AC1: register, login, token, cart create, token negatives
+- API AC2: products, cart mutations, invoice POST/GET, payload negatives
+- Manual CSV (8 cases), UI/API automation (5–8 per tier), reports, README, ai-prompts
 
----
+### Out of scope
 
-### In Scope
+- Bug-hunt environment, API v1–v4, full admin UI regression
+- Security / penetration testing, load testing, cross-browser matrix
+- Non-COD payment gateways, exhaustive catalog permutations
+- Stretch API areas (messages, reports) unless time permits
 
-| Area | Coverage |
-|------|----------|
-| UI authentication | Register, login, profile (AC1) |
-| UI catalog | Listing, search, filter, sort, detail |
-| UI cart | Add, update quantity, remove, view |
-| UI checkout | Billing, COD payment |
-| UI invoice | Double-confirm generation, My Invoices |
-| API auth | Register, login, bearer token |
-| API catalog | GET products (list, search, filters) |
-| API cart | Create, add/update, verify |
-| API invoice | POST (COD), GET invoices |
-| Negatives | Invalid login, registration, empty cart, bad billing, bad token, invalid payload |
-| Test tiers | Manual CSV, UI `@Smoke`/`@Regression`, API `@Smoke`/`@Regression` |
-| Artifacts | project-info, README, reports, ai-prompts, iterative git |
+### Acceptance criteria
 
----
-
-### Out of Scope
-
-| Area | Reason |
-|------|--------|
-| Bug-hunt environment (`with-bugs`) | Not core SUT |
-| API v1–v4 | Sprint 5 only |
-| Full admin UI regression | Not in core ACs |
-| All `/reports` endpoints | Stretch only |
-| DELETE / admin destruction | Optional stretch |
-| Security / penetration testing | Beyond functional assessment |
-| Performance / load testing | Not in AC |
-| Cross-browser matrix | Default Chromium |
-| Mobile/responsive certification | Not required |
-| Third-party payment gateways | COD only |
-| Exhaustive catalog permutations | Case limit (5–8 per tier) |
-
----
-
-### Test Objectives
-
-| ID | Objective | Success Measure |
-|----|-----------|-----------------|
-| TO-01 | Validate UI AC1: register, login, profile | Manual + UI Pass |
-| TO-02 | Validate UI AC2: E2E purchase + invoice | UI regression Pass |
-| TO-03 | Validate API AC1: token + create cart | API smoke/regression Pass |
-| TO-04 | Validate API AC2: products → cart → invoice | API E2E chain Pass |
-| TO-05 | Valid state transitions (user → cart → invoice) | Positive cases Pass |
-| TO-06 | Invalid transitions rejected | Negative cases Pass |
-| TO-07 | Smoke suite &lt; 30 min from README | `@Smoke` runnable |
-| TO-08 | Regression within case limit | `@Regression` Pass |
-| TO-09 | Traceability req → case → automation | Mapping documented |
-| TO-10 | Runnable automation (minimal manual setup) | README commands work |
-| TO-11 | Execution evidence, all Passed | Reports in repo |
-| TO-12 | Responsible AI workflow documented | ai-prompts/ complete |
-
----
-
-### Acceptance Criteria
-
-#### UI-AC1: User Registration & Login
+#### UI-AC1: Registration & login
 
 | # | Criterion |
 |---|-----------|
@@ -331,7 +205,7 @@ Discover Products → Authenticate → Add to Cart → Manage Cart → Checkout 
 | 4 | Invalid login rejected with error |
 | 5 | Invalid registration rejected (duplicate email, weak password) |
 
-#### UI-AC2: End-to-End Purchase Flow
+#### UI-AC2: End-to-end purchase
 
 | # | Criterion |
 |---|-----------|
@@ -343,7 +217,7 @@ Discover Products → Authenticate → Add to Cart → Manage Cart → Checkout 
 | 6 | Invoice visible under My Invoices |
 | 7 | Invoice details match order and billing |
 
-#### API-AC1: User Authentication & Cart Creation
+#### API-AC1: Authentication & cart
 
 | # | Criterion |
 |---|-----------|
@@ -351,9 +225,9 @@ Discover Products → Authenticate → Add to Cart → Manage Cart → Checkout 
 | 2 | Login returns valid `access_token` |
 | 3 | Bearer token works on protected endpoints |
 | 4 | Cart created with `POST /carts` |
-| 5 | Missing/invalid token rejected |
+| 5 | Missing / invalid token rejected |
 
-#### API-AC2: Product Selection & Invoice Generation
+#### API-AC2: Products & invoice
 
 | # | Criterion |
 |---|-----------|
@@ -361,10 +235,10 @@ Discover Products → Authenticate → Add to Cart → Manage Cart → Checkout 
 | 2 | Products added to cart |
 | 3 | Cart contents verified via `GET /carts/{id}` |
 | 4 | Invoice generated via `POST /invoices` (COD) |
-| 5 | Payload includes billing fields, `cart_id`, `payment_method` |
+| 5 | Payload includes billing, `cart_id`, `payment_method` |
 | 6 | Invalid payload rejected |
 
-**Reference invoice POST body:**
+**Reference invoice POST body**
 
 ```json
 {
@@ -381,83 +255,393 @@ Discover Products → Authenticate → Add to Cart → Manage Cart → Checkout 
 
 ---
 
-### Priority
+## Test Planning
 
-#### Feature Priority
+### Tier strategy
 
-| Priority | Features |
-|----------|----------|
-| **P1 — Critical** | F-01, F-02, F-04, F-09, F-10, F-12, F-13, F-14, F-15, F-16 |
-| **P2 — High** | F-03, F-05, F-06, F-07, F-08, F-11 |
-| **P3 — Medium** | F-17, F-18, F-19 |
+| Tier | Tag | Intent | Target duration |
+|------|-----|--------|-----------------|
+| **Smoke** | `@Smoke` | Fast health checks on critical paths | ~15–30 minutes full smoke |
+| **Regression** | `@Regression` | Broader AC coverage + negatives | Run after smoke is green |
 
-#### Test Tiers
+### Case allocation (assessment limit: 5–8 per type)
 
-| Tier | Tag | Scope |
-|------|-----|-------|
-| Smoke | `@Smoke` | Login, single add-to-cart, COD checkout, double-confirm invoice, API token + cart + invoice |
-| Regression | `@Regression` | Full AC1 + AC2, multi-cart, filters, negatives |
+| Type | Smoke | Regression | Total | Status |
+|------|-------|------------|-------|--------|
+| Manual | 3 | 5 | 8 | `FunctionalTestCase.csv` |
+| UI automation | 7 | 5 | 12 | `PrismStructure/Tests/ui/` |
+| API automation | 3 | 5 | 8 | `PrismStructure/API/tests/` |
 
-#### Suggested Case Allocation (5–8 per tier)
+Manual cases **TC-M-001–008** map to UI specs **TC-UI-SM-*** / **TC-UI-RG-*** and API specs **TC-API-SM-*** / **TC-API-RG-*** via `RTM.md`.
 
-| Tier | Manual | UI | API |
-|------|--------|-----|-----|
-| Smoke | Login, add to cart, invoice confirm | Login → add → COD → invoice | Login → cart → invoice POST |
-| Regression | Register, profile, multi-cart, negatives | AC1 + AC2 E2E + billing errors | AC1 + AC2 chain + token/payload negatives |
+### UI vs API planning
 
-#### Execution Order
+| Concern | UI automation | API automation |
+|---------|---------------|----------------|
+| Primary value | UX flows, double-confirm, form validation, My Invoices UI | Contract speed, token/cart/invoice chain |
+| Setup | Browser + page objects | `APIRequestContext` + service layer |
+| Negatives | Visible errors, disabled buttons | Status codes + error body schema |
+| Data setup | Login via UI or reuse default customer | Register/login + bearer token in headers |
 
-1. Requirement analysis (this document)
+### Execution order
+
+1. Requirement analysis and risk register
 2. Manual smoke → manual regression
-3. API smoke → API regression
+3. API smoke → API regression (fast feedback on contracts)
 4. UI smoke → UI regression
-5. Execution reports + README + ai-prompts
-6. Stretch: admin API, messages (if time permits)
+5. Full suite + reports + README
+6. Copy execution evidence to `reports/`
+
+### Traceability
+
+Requirements → manual IDs → automation IDs documented in:
+
+- `RTM.md` / `RTM.csv`
+- `test-plan.md`
+- Spec file names and test titles (e.g. `TC-UI-SM-LOGIN`, `TC-API-SM-003`)
 
 ---
 
-### Traceability Summary
+## Automation Strategy
 
-| Requirement | UI AC | API AC | Smoke | Regression |
-|-------------|-------|--------|-------|------------|
-| Registration & login | UI-AC1 | API-AC1 | Partial | ✓ |
-| Profile verification | UI-AC1 | — | — | ✓ |
-| Product browse | UI-AC2 | API-AC2 | ✓ | ✓ |
-| Cart operations | UI-AC2 | API-AC1/AC2 | ✓ | ✓ |
-| COD checkout | UI-AC2 | API-AC2 | ✓ | ✓ |
-| Invoice (double confirm) | UI-AC2 | API-AC2 | ✓ | ✓ |
-| My Invoices | UI-AC2 | API-AC2 | ✓ | ✓ |
-| Negative / error paths | — | — | — | ✓ |
+### Framework choice
+
+**Playwright (JavaScript)** was selected for:
+
+- Unified UI and API testing in one runner
+- Built-in `APIRequestContext` (no separate HTTP client required)
+- Strong reporting (HTML, trace, screenshot, video)
+- Fixture model for page objects and API services
+
+The **Prism Framework** pattern organizes code into Pages, Tests, API services, Fixtures, Utils, Config, and Reports under `PrismStructure/`.
+
+### Layer architecture
+
+```
+UI:  Spec → Fixture (pages, uiFlows) → Page Object → SUT browser
+API: Spec → Fixture (apiServices, apiFlows) → Service → ApiClient → SUT API
+```
+
+### UI automation
+
+| Element | Location | Responsibility |
+|---------|----------|----------------|
+| Page objects | `Pages/` | Locators (`data-test`), navigation, actions — no assertions |
+| UI flows | `Utils/uiFlows.js` | Login, add to cart, COD checkout, sign out |
+| Fixtures | `Fixtures/testFixtures.js` | Injects `pages`, `uiFlows`, page shortcuts |
+| Specs | `Tests/ui/smoke`, `Tests/ui/regression` | Thin tests; RTM IDs in titles |
+| Assertions | `Utils/assertions.js` | Auth, cart, invoice, catalog helpers |
+
+**Key UI behaviors encoded in framework**
+
+- Do not open `/cart` before checkout (can clear session cart).
+- Checkout wizard: billing includes `house_number`; finish button clicked twice for invoice.
+- Logout via user menu dropdown.
+
+### API automation
+
+| Element | Location | Responsibility |
+|---------|----------|----------------|
+| Client | `API/clients/ApiClient.js` | `APIRequestContext`, bearer headers |
+| Services | `API/services/` | Auth, Cart, Product, Invoice endpoints |
+| Flows | `Utils/apiFlows.js` | Register → login → cart → invoice lifecycle |
+| Schemas | `API/schemas/apiSchemas.js` | Response body structure validation |
+| Assertions | `Utils/apiAssertions.js` | Status + schema wrappers |
+| Specs | `API/tests/smoke`, `API/tests/regression` | RTM-mapped API tests |
+
+**Verified API conventions**
+
+- Add line item: `POST /carts/{cartId}` with `{ product_id, quantity }`
+- Cart delete cleanup: `DELETE /carts/{cartId}` → `204`
+- User self-delete: not supported (`403`) — cart cleanup only
+
+### Tags and projects
+
+| Tag | Purpose |
+|-----|---------|
+| `@Smoke` | Fast critical path |
+| `@Regression` | Extended + negative coverage |
+| `@UI` | UI layer filter |
+| `@API` | API layer filter |
+
+Playwright projects: `ui-smoke`, `ui-regression`, `api-smoke`, `api-regression` (grep on combined tags).
+
+### Reporting and artifacts
+
+Configured in `playwright.config.js`:
+
+- HTML, JSON, JUnit, custom failure logs
+- Screenshot, video, trace: **retain on failure**
+- Submission copy: `npm run report:copy` → `reports/`
 
 ---
 
-## Smoke vs Regression Scope
+## Test Data
+
+### Sources
+
+| Location | Contents |
+|----------|----------|
+| `test-data/users-valid.json` | Valid registration templates |
+| `test-data/users-invalid.json` | Invalid login / registration cases |
+| `test-data/addresses.json` | Assessment billing reference (API + UI) |
+| `test-data/products.json` | Search terms |
+| `test-data/negative-data.json` | API negative headers and invoice payloads |
+| `test-data/boundary-values.json` | Cart quantity boundaries |
+| `PrismStructure/Data/` | Runtime modules (e.g. `defaultCustomer`) |
+| `PrismStructure/Utils/dataGenerator.js` | Faker + `uniqueEmail()`, `apiRegistrationPayload()` |
+
+### Dynamic data strategy
+
+| Need | Approach |
+|------|----------|
+| Registration | `testuser_<timestamp>@example.com` + strong unique password |
+| API invoice | `cart_id` from prior `POST /carts` response |
+| Product ID | `getFirstInStockProductId()` from live `GET /products` |
+| Phone | Numeric only (SUT validation) |
+
+### Default stable accounts (public SUT)
+
+Used for smoke login and cart regression where unique registration is not required:
+
+- `customer@practicesoftwaretesting.com` / `welcome01`
+
+### Assessment billing reference
+
+Used for COD checkout and `POST /invoices`:
+
+| Field | Value |
+|-------|-------|
+| Street | Zoey Shore |
+| City | Hesselbury |
+| State | Florida |
+| Country | TG |
+| Postal code | 1234AA |
+
+### Environment assumptions
+
+- Sprint 5 public URLs only (no local stack)
+- Shared database — tests may see data from other users
+- No dedicated test tenant or API seed endpoint
+- Cloudflare may affect UI timing
+
+Prompt notes: `ai-prompts/test-data.md`.
+
+---
+
+## Validation
+
+### Manual tests
+
+- Execute steps from `FunctionalTestCase.csv` against live SUT
+- Record **Passed** / **Failed** in Status column
+- Capture screenshots for key flows in `screenshots/`
+
+### Automation — process
+
+1. **Smoke first** — fix failures before expanding regression
+2. **Live SUT execution** — no mocked API responses
+3. **AC traceability** — each spec title maps to RTM ID and manual case where applicable
+4. **Assertion review** — replaced weak checks (`toBeTruthy`, `ok()`) with:
+   - HTTP status expectations
+   - Response body schema validation (`apiSchemas.js`)
+   - Domain helpers: token, cart, invoice, UI catalog/checkout/invoice
+5. **Full suite runs** — `npm run test:smoke`, `npm run test:regression` with reports generated
+
+### API validation specifics
+
+| Check | Method |
+|-------|--------|
+| Login body | JWT format, `token_type`, `expires_in` |
+| Cart body | `cart_items`, `product_id`, quantity, nested product price |
+| Invoice body | `INV-*` number, billing fields, `subtotal` / `total` |
+| Errors | `message`, `errors`, or Laravel field validation arrays |
+| Unauthorized | `401`/`403` + error message |
+
+### UI validation specifics
+
+| Check | Method |
+|-------|--------|
+| Auth state | Nav sign-in visibility, account URL |
+| Catalog | Product count, search term in results |
+| Cart / checkout | Line items, quantities, cart total, confirm step |
+| Invoice | Table rows, `INV-*` pattern, billing text in table |
+| Negatives | Alert visible, proceed disabled, invoice count stable |
+
+### Refinement driven by validation
+
+| Finding | Fix applied |
+|---------|-------------|
+| Wrong cart add endpoint | `POST /carts/{id}` instead of `/items` |
+| Invoice needs two confirms | `confirmInvoiceTwice()` with DOM click |
+| Cart empty on checkout | Verify on `/checkout`, not `/cart` |
+| Registration password rejected | Unique strong passwords via generator |
+| Profile pre-fills billing | Assert populated fields, not exact assessment values on checkout |
+
+Validation notes: `ai-prompts/test-design.md`.
+
+---
+
+## Debugging
+
+### Process
+
+1. Re-run failed spec individually with Playwright CLI
+2. Open **HTML report** (`npm run report`) — screenshots, video, trace links
+3. Review **failure logs** (`Reports/failure-logs/failures.log`)
+4. Share trace snippet, response body, or locator error with Cursor in a **focused debug session**
+5. Apply minimal fix; re-run smoke affected area before full regression
+
+### Artifacts used
+
+| Artifact | Location | Use |
+|----------|----------|-----|
+| HTML report | `Reports/playwright-report/` | Primary triage UI |
+| Trace | `Reports/test-results/` | Step timeline, network, DOM |
+| Screenshot | `Reports/test-results/` | Failure state capture |
+| Video | `Reports/test-results/` | UI flow replay |
+| Failure log | `Reports/failure-logs/` | Consolidated errors + attachment paths |
+| API logs | `Utils/logger.js` | Request method, path, status in console |
+
+### Common issues resolved
+
+| Symptom | Root cause | Resolution |
+|---------|------------|------------|
+| Empty checkout | Opened `/cart` or timing | `openWithItems()` on checkout |
+| Finish button not clickable | Hidden in wizard step | `evaluate()` DOM click |
+| `proceed-3` disabled | Missing `house_number` | Fill house number in billing |
+| Registration fail | Common password / phone format | Faker + numeric phone |
+| API cart 404 | Wrong endpoint | `POST /carts/{cartId}` |
+| Flaky login page | Slow load | Wait for email field in `LoginPage.open()` |
+| Search assertion fail | First result not matching term | Assert any result contains term |
+
+Outcomes logged: `ai-prompts/automation-and-debugging.md`.
+
+---
+
+## Sensitive Information
+
+### Information **not** shared with AI tools
+
+| Category | Examples |
+|----------|----------|
+| Personal credentials | Real email, phone, passwords beyond public SUT defaults |
+| Corporate secrets | Internal URLs, VPN, proprietary API keys |
+| Production systems | Any environment unrelated to Toolshop Sprint 5 |
+| Tokens in prompts | Paste full bearer tokens from other systems |
+| Raw verbose logs | Full logs with PII — summarize errors instead |
+
+### Information **appropriate** to share
+
+- Public SUT URLs and Swagger documentation
+- Public demo credentials (`customer@…`, `welcome01`)
+- Synthetic test data (`testuser_timestamp@example.com`)
+- Playwright traces, screenshots, and **sanitized** API response bodies
+- Framework file paths and assessment acceptance criteria
+
+### Repository hygiene
+
+- No `.env` files with secrets committed
+- No hard-coded personal data in specs or JSON fixtures
+- Invoice/cart IDs are runtime-generated, not production identifiers
+
+If a secret is accidentally committed: remove immediately, rotate if applicable, and use secure storage in real projects.
+
+---
+
+## Reuse Strategy
+
+This workflow is designed to transfer to production QA engagements with minimal rework.
+
+### Phase template
+
+| Phase | Activities | Artifacts |
+|-------|------------|-----------|
+| 1 — Discover | Requirements, risks, ACs | `project-info.md`, risk register |
+| 2 — Design | Manual cases, RTM, test data | CSV, `test-data/`, ai-prompts |
+| 3 — Automate smoke | API then UI smoke | Tagged specs, README commands |
+| 4 — Automate regression | Negatives + E2E depth | Regression specs, assertions |
+| 5 — Execute & report | Full run, HTML/JUnit, evidence | `reports/`, execution summary |
+| 6 — Maintain | RTM updates, flake fixes | Git history per change |
+
+### Reusable patterns
+
+| Pattern | Benefit |
+|---------|---------|
+| Focused AI sessions per flow | Reduces hallucination and scope creep |
+| `ai-prompts/` prompt log | Audit trail for AI-assisted QA |
+| API service layer + UI page objects | Parallel UI/API delivery |
+| `uiFlows` / `apiFlows` | One place to fix flow changes |
+| Central assertions + schemas | Consistent validation, easy strengthening |
+| Tag + project matrix (`@UI` / `@API` × smoke/regression) | Flexible CI pipelines |
+| Dynamic test data on shared DB | Fewer collisions |
+| Smoke-before-regression gate | Faster feedback loop |
+
+### CI integration (future)
+
+- `npm run test:api:smoke` on every PR (fast)
+- `npm run test:ui:smoke` on merge to main
+- Nightly `test:regression` with JUnit upload
+- `report:copy` artifact for auditors
+
+### What scales vs what customizes
+
+| Reusable across projects | Customize per project |
+|----------------------------|------------------------|
+| Prism folder layout | Routes, locators, ACs |
+| Fixture + flow pattern | Endpoint services |
+| Reporter stack | Base URLs, credentials store |
+| RTM structure | Requirement IDs |
+| AI phase workflow | Domain vocabulary in prompts |
+
+---
+
+## Setup Summary (Assessment AI Workflow — 10 Points)
+
+| # | Topic | Summary |
+|---|-------|---------|
+| 1 | **Context to AI** | Assessment brief, SUT URLs, ACs, existing framework files, focused chats |
+| 2 | **Requirement analysis** | AI extracts flows/risks; human validates against Swagger and UI |
+| 3 | **Test planning** | UI vs API split; smoke vs regression; 5–8 case cap per tier |
+| 4 | **Manual test design** | CSV positive/negative/edge; AC traceability |
+| 5 | **Automation design** | Playwright Prism: POM, services, tags, reusable flows |
+| 6 | **Validation** | Live SUT runs; schema assertions; smoke-first gate |
+| 7 | **Test data** | Faker, JSON fixtures, dynamic IDs, public defaults |
+| 8 | **Debugging** | HTML report, trace, failure logs, focused AI debug sessions |
+| 9 | **Sensitive information** | No real PII/secrets; synthetic data only |
+| 10 | **Reuse** | Phased delivery, ai-prompts, RTM, API+UI parallel strategy |
+
+---
+
+## Smoke vs Regression Scope (Implemented)
 
 ### @Smoke
 
-| # | Scenario | Layer |
-|---|----------|-------|
-| 1 | Home/catalog loads with products | UI |
-| 2 | Login with valid user | UI |
-| 3 | Add one product to cart | UI |
-| 4 | Login → COD checkout → double-confirm invoice → My Invoices | UI |
-| 5 | API login returns `access_token` | API |
-| 6 | API create cart with bearer token | API |
-| 7 | API GET products | API |
-| 8 | API chain: login → cart → add product → POST invoice | API |
+| Layer | Specs | Coverage |
+|-------|-------|----------|
+| UI (7) | Login, registration, search, cart, checkout, invoice, logout | Critical purchase path |
+| API (3) | Products, login token, E2E register→invoice | Contract health + E2E chain |
 
 ### @Regression
 
-| # | Scenario | Layer |
-|---|----------|-------|
-| 1 | Register new user + profile verification | UI / Manual |
-| 2 | Login/register negatives | UI / API / Manual |
-| 3 | Search + filter + sort | UI |
-| 4 | Multi-item cart + quantity update + remove | UI / API |
-| 5 | Checkout billing validation errors | UI / Manual |
-| 6 | Empty cart checkout blocked | UI / Manual |
-| 7 | Full E2E: register → browse → multi-cart → COD → invoice | UI |
-| 8 | API negatives: bad token, invalid invoice payload | API |
+| Layer | Specs | Coverage |
+|-------|-------|----------|
+| UI (5) | Profile, catalog/cart, session, auth negative, checkout negative | AC1 + AC2 depth + negatives |
+| API (5) | Register, cart mutations, token negative, invoice negative, invoice list | AC1 + AC2 + error paths |
+
+---
+
+## Related Documents
+
+| Document | Purpose |
+|----------|---------|
+| `README.md` | Install, run commands, reports, troubleshooting |
+| `test-plan.md` | Detailed test plan |
+| `qa-risk-analysis.md` | Full risk register |
+| `RTM.md` | Requirements traceability matrix |
+| `test-suite-scope.md` | Case count compliance |
+| `ai-prompts/` | Cursor AI prompt history |
+| `PrismStructure/FRAMEWORK.md` | Framework technical detail |
 
 ---
 

@@ -1,0 +1,50 @@
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="10.048447">
+<testsuite name="API\tests\smoke\auth.spec.js" timestamp="2026-08-03T13:09:18.672Z" hostname="api-smoke" tests="1" failures="0" skipped="0" time="0.837" errors="0">
+<testcase name="API Auth Smoke @Smoke @API › TC-API-SM-002 — login returns access_token" classname="API\tests\smoke\auth.spec.js" time="0.837">
+<system-out>
+<![CDATA[[API] POST /users/login → 200
+]]>
+</system-out>
+<system-err>
+<![CDATA[(node:31608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+]]>
+</system-err>
+</testcase>
+</testsuite>
+<testsuite name="API\tests\smoke\e2e-purchase.spec.js" timestamp="2026-08-03T13:09:18.672Z" hostname="api-smoke" tests="1" failures="0" skipped="0" time="6.818" errors="0">
+<testcase name="API E2E Purchase Smoke @Smoke @API › TC-API-SM-003 — register login cart product invoice and cleanup" classname="API\tests\smoke\e2e-purchase.spec.js" time="6.818">
+<system-out>
+<![CDATA[[STEP] Register user
+[API] POST /users/register → 201
+[STEP] Login and capture token
+[API] POST /users/login → 200
+[STEP] Captured access token
+[STEP] Create cart
+[API] POST /carts → 201
+[STEP] Get products
+[API] GET /products → 200
+[API] GET /products → 200
+[STEP] Add product to cart
+[API] POST /carts/01kz3vxb1rtmqc6jcr0m11rk99 → 200
+[STEP] Verify cart
+[API] GET /carts/01kz3vxb1rtmqc6jcr0m11rk99 → 200
+[STEP] Generate invoice
+[API] POST /invoices → 201
+[STEP] Verify invoice list
+[API] GET /invoices → 200
+[STEP] Delete test cart
+[API] DELETE /carts/01kz3vxb1rtmqc6jcr0m11rk99 → 204
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="API\tests\smoke\products.spec.js" timestamp="2026-08-03T13:09:18.672Z" hostname="api-smoke" tests="1" failures="0" skipped="0" time="0.645" errors="0">
+<testcase name="API Products Smoke @Smoke @API › TC-API-SM-001 — GET /products returns catalog" classname="API\tests\smoke\products.spec.js" time="0.645">
+<system-out>
+<![CDATA[[API] GET /products → 200
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>

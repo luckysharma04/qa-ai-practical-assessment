@@ -5,6 +5,7 @@ const { env } = require('./Config/env');
 const { TAG_GREP } = require('./Config/constants');
 
 const chrome = { ...devices['Desktop Chrome'] };
+const reportsDir = path.join(__dirname, 'Reports');
 
 module.exports = defineConfig({
   testDir: '.',
@@ -17,16 +18,21 @@ module.exports = defineConfig({
   expect: { timeout: 10_000 },
   reporter: [
     ['list'],
-    ['html', { outputFolder: path.join('Reports', 'playwright-report'), open: 'never' }],
-    ['json', { outputFile: path.join('Reports', 'test-results.json') }],
+    ['html', { outputFolder: path.join(reportsDir, 'playwright-report'), open: 'never' }],
+    ['json', { outputFile: path.join(reportsDir, 'test-results.json') }],
+    ['junit', { outputFile: path.join(reportsDir, 'junit-results.xml') }],
+    [
+      path.join(reportsDir, 'reporters', 'failureLogReporter.js'),
+      { outputDir: path.join(reportsDir, 'failure-logs') },
+    ],
   ],
-  outputDir: path.join('Reports', 'test-results'),
+  outputDir: path.join(reportsDir, 'test-results'),
   use: {
     baseURL: env.uiBaseUrl,
     testIdAttribute: 'data-test',
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
-    video: 'off',
+    video: 'retain-on-failure',
     actionTimeout: 15_000,
     navigationTimeout: 30_000,
   },

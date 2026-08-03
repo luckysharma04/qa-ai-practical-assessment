@@ -13,7 +13,9 @@
     "test:ui:regression": "playwright test --project ui-regression",
     "test:api:smoke": "playwright test --project api-smoke",
     "test:api:regression": "playwright test --project api-regression",
-    "report": "playwright show-report Reports/playwright-report"
+    "report": "playwright show-report Reports/playwright-report",
+    "report:html": "playwright show-report Reports/playwright-report",
+    "report:copy": "node scripts/copy-reports.js"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.0.0",
