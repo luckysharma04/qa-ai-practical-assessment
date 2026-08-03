@@ -1,0 +1,19 @@
+{
+  "name": "qa-ai-practical-assessment",
+  "version": "1.0.0",
+  "description": "QA AI Practical Assessment — Toolshop manual + Playwright Prism automation",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm install --prefix PrismStructure",
+    "test": "npm run test --prefix PrismStructure",
+    "test:smoke": "npm run test:smoke --prefix PrismStructure",
+    "test:regression": "npm run test:regression --prefix PrismStructure",
+    "test:ui": "npm run test:ui --prefix PrismStructure",
+    "test:api": "npm run test:api --prefix PrismStructure",
+    "test:ui:smoke": "npm run test:ui:smoke --prefix PrismStructure",
+    "test:ui:regression": "npm run test:ui:regression --prefix PrismStructure",
+    "test:api:smoke": "npm run test:api:smoke --prefix PrismStructure",
+    "test:api:regression": "npm run test:api:regression --prefix PrismStructure",
+    "report": "npm run report --prefix PrismStructure"
+  }
+}

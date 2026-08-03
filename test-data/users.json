@@ -1,0 +1,15 @@
+{
+  "defaultCustomer": {
+    "email": "customer@practicesoftwaretesting.com",
+    "password": "welcome01"
+  },
+  "secondaryCustomer": {
+    "email": "customer2@practicesoftwaretesting.com",
+    "password": "welcome01"
+  },
+  "adminUser": {
+    "email": "admin@practicesoftwaretesting.com",
+    "password": "welcome01"
+  },
+  "notes": "Public SUT credentials only. Use testuser_<timestamp>@example.com for new registrations."
+}

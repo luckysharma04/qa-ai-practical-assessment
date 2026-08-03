@@ -29,3 +29,10 @@ npm-debug.log*
 
 # Coverage
 coverage/
+
+# Generated reports (keep templates; playwright output can be large)
+PrismStructure/Reports/playwright-report/
+PrismStructure/Reports/test-results/
+PrismStructure/Reports/test-results.json
+reports/playwright-report/
+reports/test-results.json

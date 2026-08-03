@@ -2,7 +2,7 @@
 
 Per QA Practical Assessment: **5–8 test cases per type** (Manual, UI, API), including `@Smoke` and `@Regression`.
 
-## Manual (`FunctionalTestCase.csv`)
+## Manual (`FunctionalTestCase/FunctionalTestCase.csv`)
 
 | Count | Limit | Status |
 |-------|-------|--------|

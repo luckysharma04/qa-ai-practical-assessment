@@ -1,0 +1,17 @@
+{
+  "validBillingApi": {
+    "billing_street": "Zoey Shore",
+    "billing_city": "Hesselbury",
+    "billing_state": "Florida",
+    "billing_country": "TG",
+    "billing_postal_code": "1234AA"
+  },
+  "validBillingUi": {
+    "street": "Zoey Shore",
+    "city": "Hesselbury",
+    "state": "Florida",
+    "country": "TG",
+    "postalCode": "1234AA"
+  },
+  "paymentMethod": "cash-on-delivery"
+}
