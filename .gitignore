@@ -6,6 +6,9 @@ test-results/
 playwright-report/
 blob-report/
 playwright/.cache/
+PrismStructure/Reports/playwright-report/
+PrismStructure/Reports/test-results/
+PrismStructure/Reports/test-results.json
 
 # Environment
 .env

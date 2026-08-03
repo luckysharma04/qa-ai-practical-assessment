@@ -1,0 +1,22 @@
+{
+  "name": "toolshop-prism-playwright",
+  "version": "1.0.0",
+  "description": "Playwright Prism Framework for Practice Software Testing Toolshop",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @Smoke",
+    "test:regression": "playwright test --grep @Regression",
+    "test:ui": "playwright test Tests/ui",
+    "test:api": "playwright test API/tests",
+    "test:ui:smoke": "playwright test Tests/ui --grep @Smoke",
+    "test:ui:regression": "playwright test Tests/ui --grep @Regression",
+    "test:api:smoke": "playwright test API/tests --grep @Smoke",
+    "test:api:regression": "playwright test API/tests --grep @Regression",
+    "report": "playwright show-report Reports/playwright-report"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.0.0",
+    "@playwright/test": "^1.49.0"
+  }
+}
