@@ -20,6 +20,7 @@ module.exports = defineConfig({
   outputDir: path.join('Reports', 'test-results'),
   use: {
     baseURL: env.uiBaseUrl,
+    testIdAttribute: 'data-test',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'off',

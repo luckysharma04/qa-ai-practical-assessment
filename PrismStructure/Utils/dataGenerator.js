@@ -9,11 +9,20 @@ function uniqueEmail() {
 }
 
 function registrationUser() {
+  const stamp = Date.now();
   return {
-    email: uniqueEmail(),
-    password: 'TestPass123!',
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
+    dob: '1990-06-15',
+    country: 'United States of America',
+    postalCode: '1234AA',
+    houseNumber: '42',
+    street: 'Zoey Shore',
+    city: 'Hesselbury',
+    state: 'Florida',
+    phone: '1234567890',
+    email: `testuser_${stamp}@example.com`,
+    password: 'TestPass123!',
   };
 }
 

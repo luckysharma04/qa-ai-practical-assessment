@@ -7,8 +7,10 @@ const ROUTES = {
   register: '/auth/register',
   cart: '/cart',
   checkout: '/checkout',
-  profile: '/account',
+  account: '/account',
+  profile: '/account/profile',
   invoices: '/account/invoices',
+  product: (id) => `/product/${id}`,
 };
 
 const PAYMENT_METHOD = {

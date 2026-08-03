@@ -1,7 +1,14 @@
-const { test as base, expect } = require('@playwright/test');
-const { LoginPage } = require('../Pages/LoginPage');
+const playwright = require('@playwright/test');
+const { expect } = playwright;
+const { PageFactory } = require('../Pages/PageFactory');
 const { HomePage } = require('../Pages/HomePage');
+const { LoginPage } = require('../Pages/LoginPage');
+const { RegistrationPage } = require('../Pages/RegistrationPage');
+const { ProductPage } = require('../Pages/ProductPage');
+const { CartPage } = require('../Pages/CartPage');
 const { CheckoutPage } = require('../Pages/CheckoutPage');
+const { InvoicePage } = require('../Pages/InvoicePage');
+const { ProfilePage } = require('../Pages/ProfilePage');
 const { ApiClient } = require('../API/clients/ApiClient');
 const { AuthApi } = require('../API/services/AuthApi');
 const { CartApi } = require('../API/services/CartApi');
@@ -10,17 +17,35 @@ const { ProductApi } = require('../API/services/ProductApi');
 const { defaultCustomer } = require('../Data/users');
 
 /**
- * Prism fixtures — inject page objects and API services into tests.
+ * Prism fixtures — inject page objects, page factory, and API services.
  */
-const test = base.extend({
-  loginPage: async ({ page }, use) => {
-    await use(new LoginPage(page));
+const test = playwright.test.extend({
+  pages: async ({ page }, use) => {
+    await use(new PageFactory(page));
   },
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
   },
+  loginPage: async ({ page }, use) => {
+    await use(new LoginPage(page));
+  },
+  registrationPage: async ({ page }, use) => {
+    await use(new RegistrationPage(page));
+  },
+  productPage: async ({ page }, use) => {
+    await use(new ProductPage(page));
+  },
+  cartPage: async ({ page }, use) => {
+    await use(new CartPage(page));
+  },
   checkoutPage: async ({ page }, use) => {
     await use(new CheckoutPage(page));
+  },
+  invoicePage: async ({ page }, use) => {
+    await use(new InvoicePage(page));
+  },
+  profilePage: async ({ page }, use) => {
+    await use(new ProfilePage(page));
   },
   apiClient: async ({}, use) => {
     const client = await ApiClient.create();
@@ -43,6 +68,11 @@ const test = base.extend({
       product: new ProductApi(client),
     });
     await client.request.dispose();
+  },
+  loggedInPage: async ({ page, loginPage }, use) => {
+    await loginPage.open();
+    await loginPage.login(defaultCustomer.email, defaultCustomer.password);
+    await use(page);
   },
 });
 
