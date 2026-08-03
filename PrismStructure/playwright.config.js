@@ -2,6 +2,9 @@
 const { defineConfig, devices } = require('@playwright/test');
 const path = require('path');
 const { env } = require('./Config/env');
+const { TAG_GREP } = require('./Config/constants');
+
+const chrome = { ...devices['Desktop Chrome'] };
 
 module.exports = defineConfig({
   testDir: '.',
@@ -29,8 +32,24 @@ module.exports = defineConfig({
   },
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'ui-smoke',
+      grep: TAG_GREP.uiSmoke,
+      use: chrome,
+    },
+    {
+      name: 'ui-regression',
+      grep: TAG_GREP.uiRegression,
+      use: chrome,
+    },
+    {
+      name: 'api-smoke',
+      grep: TAG_GREP.apiSmoke,
+      use: chrome,
+    },
+    {
+      name: 'api-regression',
+      grep: TAG_GREP.apiRegression,
+      use: chrome,
     },
   ],
 });

@@ -12,7 +12,7 @@ const {
   expectProductListBody,
 } = require('../../../Utils/apiAssertions');
 
-test.describe('API E2E Purchase Smoke @Smoke', () => {
+test.describe('API E2E Purchase Smoke @Smoke @API', () => {
   test('TC-API-SM-003 — register login cart product invoice and cleanup', async ({
     apiFlows,
   }) => {

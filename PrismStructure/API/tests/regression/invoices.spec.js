@@ -10,7 +10,7 @@ const {
   expectStatus,
 } = require('../../../Utils/apiAssertions');
 
-test.describe('API Invoices Regression @Regression', () => {
+test.describe('API Invoices Regression @Regression @API', () => {
   test('TC-API-RG-005 — list invoices after COD order', async ({ apiServices }) => {
     const token = await apiServices.auth.getAccessToken(
       defaultCustomer.email,

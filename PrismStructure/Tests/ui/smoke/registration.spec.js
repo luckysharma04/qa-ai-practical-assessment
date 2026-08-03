@@ -2,7 +2,7 @@ const { test } = require('../../../Fixtures/testFixtures');
 const { registrationUser } = require('../../../Utils/dataGenerator');
 const { expectAccountPage } = require('../../../Utils/assertions');
 
-test.describe('Registration Smoke @Smoke', () => {
+test.describe('Registration Smoke @Smoke @UI', () => {
   test('TC-UI-SM-REG — register new user and access account', async ({
     registrationPage,
     loginPage,

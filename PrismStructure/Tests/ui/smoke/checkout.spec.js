@@ -6,7 +6,7 @@ const {
   expectBillingFieldsPopulated,
 } = require('../../../Utils/assertions');
 
-test.describe('Checkout Smoke @Smoke', () => {
+test.describe('Checkout Smoke @Smoke @UI', () => {
   test('TC-UI-SM-CHECKOUT — complete COD checkout billing and payment steps', async ({
     uiFlows,
     page,

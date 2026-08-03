@@ -20,6 +20,20 @@ const PAYMENT_METHOD = {
 const TAGS = {
   smoke: '@Smoke',
   regression: '@Regression',
+  ui: '@UI',
+  api: '@API',
 };
 
-module.exports = { ROUTES, PAYMENT_METHOD, TAGS };
+/** Playwright project grep — AND match for layered tag execution. */
+const TAG_GREP = {
+  uiSmoke: /(?=.*@UI)(?=.*@Smoke)/,
+  uiRegression: /(?=.*@UI)(?=.*@Regression)/,
+  apiSmoke: /(?=.*@API)(?=.*@Smoke)/,
+  apiRegression: /(?=.*@API)(?=.*@Regression)/,
+  smoke: /@Smoke/,
+  regression: /@Regression/,
+  ui: /@UI/,
+  api: /@API/,
+};
+
+module.exports = { ROUTES, PAYMENT_METHOD, TAGS, TAG_GREP };

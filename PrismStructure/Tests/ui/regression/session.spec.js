@@ -7,7 +7,7 @@ const {
   expectProtectedRouteBlocked,
 } = require('../../../Utils/assertions');
 
-test.describe('Session Regression @Regression', () => {
+test.describe('Session Regression @Regression @UI', () => {
   test('TC-UI-RG-003 — login establishes session and logout blocks protected routes', async ({
     uiFlows,
     loginPage,

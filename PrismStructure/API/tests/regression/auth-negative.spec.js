@@ -2,7 +2,7 @@ const { test } = require('../../../Fixtures/testFixtures');
 const { getNegativeApiCase } = require('../../../Utils/dataGenerator');
 const { expectUnauthorizedResponse } = require('../../../Utils/apiAssertions');
 
-test.describe('API Auth Negative Regression @Regression', () => {
+test.describe('API Auth Negative Regression @Regression @API', () => {
   test('TC-API-RG-003 — missing and invalid bearer token rejected', async ({
     apiServices,
   }) => {

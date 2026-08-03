@@ -5,7 +5,7 @@ const {
   expectLoginResponse,
 } = require('../../../Utils/apiAssertions');
 
-test.describe('API Registration Regression @Regression', () => {
+test.describe('API Registration Regression @Regression @API', () => {
   test('TC-API-RG-001 — POST /users/register creates user', async ({ apiServices }) => {
     const payload = apiRegistrationPayload();
 

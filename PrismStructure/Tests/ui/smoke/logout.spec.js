@@ -6,7 +6,7 @@ const {
   expectUnauthenticated,
 } = require('../../../Utils/assertions');
 
-test.describe('Logout Smoke @Smoke', () => {
+test.describe('Logout Smoke @Smoke @UI', () => {
   test('TC-UI-SM-LOGOUT — logout ends session and blocks protected routes', async ({
     uiFlows,
     page,

@@ -1,7 +1,7 @@
 const { test, expect } = require('../../../Fixtures/testFixtures');
 const { expectProductListResponse } = require('../../../Utils/apiAssertions');
 
-test.describe('API Products Smoke @Smoke', () => {
+test.describe('API Products Smoke @Smoke @API', () => {
   test('TC-API-SM-001 — GET /products returns catalog', async ({ apiClient }) => {
     const { ProductApi } = require('../../services/ProductApi');
     const productApi = new ProductApi(apiClient);

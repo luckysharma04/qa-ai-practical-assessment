@@ -10,7 +10,7 @@ const {
   expectUnauthenticated,
 } = require('../../../Utils/assertions');
 
-test.describe('Auth Negative Regression @Regression', () => {
+test.describe('Auth Negative Regression @Regression @UI', () => {
   test('TC-UI-RG-004 — invalid login and duplicate registration are rejected', async ({
     loginPage,
     registrationPage,

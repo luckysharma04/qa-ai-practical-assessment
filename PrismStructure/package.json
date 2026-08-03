@@ -7,12 +7,12 @@
     "test": "playwright test",
     "test:smoke": "playwright test --grep @Smoke",
     "test:regression": "playwright test --grep @Regression",
-    "test:ui": "playwright test Tests/ui",
-    "test:api": "playwright test API/tests",
-    "test:ui:smoke": "playwright test Tests/ui --grep @Smoke",
-    "test:ui:regression": "playwright test Tests/ui --grep @Regression",
-    "test:api:smoke": "playwright test API/tests --grep @Smoke",
-    "test:api:regression": "playwright test API/tests --grep @Regression",
+    "test:ui": "playwright test --grep @UI",
+    "test:api": "playwright test --grep @API",
+    "test:ui:smoke": "playwright test --project ui-smoke",
+    "test:ui:regression": "playwright test --project ui-regression",
+    "test:api:smoke": "playwright test --project api-smoke",
+    "test:api:regression": "playwright test --project api-regression",
     "report": "playwright show-report Reports/playwright-report"
   },
   "devDependencies": {

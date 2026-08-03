@@ -5,7 +5,7 @@ const {
   expectProfileDetails,
 } = require('../../../Utils/assertions');
 
-test.describe('Registration Profile Regression @Regression', () => {
+test.describe('Registration Profile Regression @Regression @UI', () => {
   test('TC-UI-RG-001 — register new user and verify profile details', async ({
     uiFlows,
     profilePage,

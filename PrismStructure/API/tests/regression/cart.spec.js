@@ -8,7 +8,7 @@ const {
   expectStatus,
 } = require('../../../Utils/apiAssertions');
 
-test.describe('API Cart Regression @Regression', () => {
+test.describe('API Cart Regression @Regression @API', () => {
   test('TC-API-RG-002 — add update and verify cart via GET /carts/{id}', async ({
     apiServices,
   }) => {

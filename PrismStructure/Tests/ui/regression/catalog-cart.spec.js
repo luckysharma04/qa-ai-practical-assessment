@@ -7,7 +7,7 @@ const {
   expectCheckoutLineItems,
 } = require('../../../Utils/assertions');
 
-test.describe('Catalog Cart Regression @Regression', () => {
+test.describe('Catalog Cart Regression @Regression @UI', () => {
   test('TC-UI-RG-002 — search filter multi-item cart and quantity update', async ({
     uiFlows,
     homePage,

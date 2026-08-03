@@ -12,7 +12,7 @@ const {
   expectStatus,
 } = require('../../../Utils/apiAssertions');
 
-test.describe('API Invoice Negative Regression @Regression', () => {
+test.describe('API Invoice Negative Regression @Regression @API', () => {
   test('TC-API-RG-004 — invalid invoice payloads are rejected', async ({
     apiServices,
   }) => {

@@ -7,7 +7,7 @@ const {
   expectInvoiceCountStable,
 } = require('../../../Utils/assertions');
 
-test.describe('Checkout Negative Regression @Regression', () => {
+test.describe('Checkout Negative Regression @Regression @UI', () => {
   test('TC-UI-RG-005 — empty cart invalid billing and single confirm block checkout', async ({
     uiFlows,
     pages,

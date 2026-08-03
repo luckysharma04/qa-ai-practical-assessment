@@ -3,7 +3,7 @@ const { defaultCustomer } = require('../../../Data/users');
 const { getAssessmentBilling } = require('../../../Utils/dataGenerator');
 const { expectInvoiceListPage } = require('../../../Utils/assertions');
 
-test.describe('Invoice Smoke @Smoke', () => {
+test.describe('Invoice Smoke @Smoke @UI', () => {
   test('TC-UI-SM-INVOICE — generate invoice and verify My Invoices', async ({
     uiFlows,
     pages,
