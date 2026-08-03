@@ -4,9 +4,9 @@
 
 **Application Under Test:** Practice Software Testing Toolshop – Checkout & Application Flow
 
-**Assessment Start Date:** _[Fill in]_
+**Assessment Start Date:** 29 July'26
 
-**Submission Date:** _[Fill in]_
+**Submission Date:** 07 Aug'26
 
 ---
 
