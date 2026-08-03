@@ -1,6 +1,11 @@
-const { test, expect } = require('../../../Fixtures/testFixtures');
+const { test } = require('../../../Fixtures/testFixtures');
 const { defaultCustomer } = require('../../../Data/users');
 const { getAssessmentBilling } = require('../../../Utils/dataGenerator');
+const {
+  expectEmptyCheckoutBlocked,
+  expectBillingValidationBlocksProceed,
+  expectInvoiceCountStable,
+} = require('../../../Utils/assertions');
 
 test.describe('Checkout Negative Regression @Regression', () => {
   test('TC-UI-RG-005 — empty cart invalid billing and single confirm block checkout', async ({
@@ -15,8 +20,7 @@ test.describe('Checkout Negative Regression @Regression', () => {
 
     const checkout = pages.checkoutPage();
     await checkout.openEmpty();
-    expect(await checkout.isCartEmpty()).toBeTruthy();
-    await expect(checkout.proceed1).not.toBeVisible();
+    await expectEmptyCheckoutBlocked(checkout);
 
     await uiFlows.addFirstProductToCart();
     await checkout.openWithItems();
@@ -24,7 +28,7 @@ test.describe('Checkout Negative Regression @Regression', () => {
     await checkout.streetInput.fill('');
     await checkout.postalCodeInput.fill('');
     await checkout.houseNumberInput.fill('');
-    await expect(checkout.proceed3).toBeDisabled();
+    await expectBillingValidationBlocksProceed(checkout);
 
     const invoice = pages.invoicePage();
     await invoice.open();
@@ -38,7 +42,6 @@ test.describe('Checkout Negative Regression @Regression', () => {
     await orderCheckout.confirmInvoiceOnce();
 
     await invoice.open();
-    const invoicesAfterSingleConfirm = await invoice.getInvoiceRowCount();
-    expect(invoicesAfterSingleConfirm).toBe(invoicesBefore);
+    await expectInvoiceCountStable(invoice, invoicesBefore);
   });
 });

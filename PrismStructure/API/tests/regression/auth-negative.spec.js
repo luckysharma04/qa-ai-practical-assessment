@@ -1,6 +1,6 @@
-const { test, expect } = require('../../../Fixtures/testFixtures');
+const { test } = require('../../../Fixtures/testFixtures');
 const { getNegativeApiCase } = require('../../../Utils/dataGenerator');
-const { expectStatusOneOf } = require('../../../Utils/apiAssertions');
+const { expectUnauthorizedResponse } = require('../../../Utils/apiAssertions');
 
 test.describe('API Auth Negative Regression @Regression', () => {
   test('TC-API-RG-003 — missing and invalid bearer token rejected', async ({
@@ -12,11 +12,11 @@ test.describe('API Auth Negative Regression @Regression', () => {
     const noTokenResponse = await apiServices.client.get('/invoices', {
       headers: noTokenCase.headers,
     });
-    expectStatusOneOf(noTokenResponse, noTokenCase.expectedStatus);
+    await expectUnauthorizedResponse(noTokenResponse);
 
     const invalidTokenResponse = await apiServices.client.get('/invoices', {
       headers: invalidTokenCase.headers,
     });
-    expectStatusOneOf(invalidTokenResponse, invalidTokenCase.expectedStatus);
+    await expectUnauthorizedResponse(invalidTokenResponse);
   });
 });

@@ -1,5 +1,6 @@
 const path = require('path');
-const { test, expect } = require('../../../Fixtures/testFixtures');
+const { test } = require('../../../Fixtures/testFixtures');
+const { expectProductCatalog, expectProductSearchResults } = require('../../../Utils/assertions');
 
 const productsData = require(path.join(__dirname, '../../../../test-data/products.json'));
 
@@ -8,13 +9,9 @@ test.describe('Product Search Smoke @Smoke', () => {
     const searchTerm = productsData.searchTerms.valid[1];
 
     await homePage.open();
-    const initialCount = await homePage.getProductCount();
-    expect(initialCount).toBeGreaterThan(0);
+    await expectProductCatalog(page, { minProducts: 1 });
 
     await homePage.search(searchTerm);
-    await expect(page.getByTestId('product-name').first()).toBeVisible();
-
-    const resultCount = await homePage.getProductCount();
-    expect(resultCount).toBeGreaterThan(0);
+    await expectProductSearchResults(page, searchTerm, { minResults: 1 });
   });
 });

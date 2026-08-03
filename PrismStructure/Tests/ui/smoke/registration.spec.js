@@ -1,5 +1,6 @@
-const { test, expect } = require('../../../Fixtures/testFixtures');
+const { test } = require('../../../Fixtures/testFixtures');
 const { registrationUser } = require('../../../Utils/dataGenerator');
+const { expectAccountPage } = require('../../../Utils/assertions');
 
 test.describe('Registration Smoke @Smoke', () => {
   test('TC-UI-SM-REG — register new user and access account', async ({
@@ -16,7 +17,6 @@ test.describe('Registration Smoke @Smoke', () => {
       await loginPage.login(user.email, user.password);
     }
 
-    await expect(page.getByTestId('page-title')).toContainText(/my account/i);
-    await expect(page.getByTestId('nav-sign-in')).not.toBeVisible();
+    await expectAccountPage(page);
   });
 });

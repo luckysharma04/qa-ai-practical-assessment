@@ -1,9 +1,16 @@
-const { test, expect } = require('../../../Fixtures/testFixtures');
+const { test } = require('../../../Fixtures/testFixtures');
 const {
   apiRegistrationPayload,
   getApiInvoiceBilling,
 } = require('../../../Utils/dataGenerator');
-const { expectStatus } = require('../../../Utils/apiAssertions');
+const {
+  expectCapturedToken,
+  expectCartBody,
+  expectInvoiceBody,
+  expectInvoiceListed,
+  expectDeleteCartResponse,
+  expectProductListBody,
+} = require('../../../Utils/apiAssertions');
 
 test.describe('API E2E Purchase Smoke @Smoke', () => {
   test('TC-API-SM-003 — register login cart product invoice and cleanup', async ({
@@ -19,17 +26,19 @@ test.describe('API E2E Purchase Smoke @Smoke', () => {
       cleanupCart: true,
     });
 
-    expect(result.token).toBeTruthy();
-    expect(result.products.length).toBeGreaterThan(0);
-    expect(result.verifiedCart.cart_items.length).toBeGreaterThan(0);
-    expect(result.verifiedCart.cart_items[0].product_id).toBe(result.productId);
-    expect(result.invoice.id).toBeTruthy();
-    expect(result.invoice.billing_street).toBe(billing.billing_street);
+    expectCapturedToken(result.token);
+    expectProductListBody({ data: result.products });
 
-    const listed = result.invoices.find((row) => row.id === result.invoice.id);
-    expect(listed).toBeTruthy();
-    expect(listed.invoice_number).toBe(result.invoice.invoice_number);
+    expectCartBody(result.verifiedCart, {
+      cartId: result.cartId,
+      productId: result.productId,
+      quantity: 1,
+      lineCount: 1,
+    });
 
-    expect([200, 204]).toContain(result.deleteCartResponse.status());
+    expectInvoiceBody(result.invoice, billing);
+    expectInvoiceListed(result.invoices, result.invoice, billing);
+
+    await expectDeleteCartResponse(result.deleteCartResponse);
   });
 });

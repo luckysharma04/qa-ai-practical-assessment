@@ -7,6 +7,7 @@ const {
 const {
   expectLoginRejected,
   expectRegistrationErrorVisible,
+  expectUnauthenticated,
 } = require('../../../Utils/assertions');
 
 test.describe('Auth Negative Regression @Regression', () => {
@@ -32,6 +33,6 @@ test.describe('Auth Negative Regression @Regression', () => {
 
     await expect(page).toHaveURL(/auth\/register/);
     await expectRegistrationErrorVisible(page);
-    await expect(page.getByTestId('nav-sign-in')).toBeVisible();
+    await expectUnauthenticated(page);
   });
 });

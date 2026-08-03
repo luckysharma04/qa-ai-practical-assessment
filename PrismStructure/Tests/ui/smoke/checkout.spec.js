@@ -1,11 +1,14 @@
-const { test, expect } = require('../../../Fixtures/testFixtures');
+const { test } = require('../../../Fixtures/testFixtures');
 const { defaultCustomer } = require('../../../Data/users');
 const { getAssessmentBilling } = require('../../../Utils/dataGenerator');
+const {
+  expectCheckoutConfirmStep,
+  expectBillingFieldsPopulated,
+} = require('../../../Utils/assertions');
 
 test.describe('Checkout Smoke @Smoke', () => {
   test('TC-UI-SM-CHECKOUT — complete COD checkout billing and payment steps', async ({
     uiFlows,
-    pages,
     page,
   }) => {
     const billing = getAssessmentBilling().ui;
@@ -14,10 +17,10 @@ test.describe('Checkout Smoke @Smoke', () => {
     const checkout = await uiFlows.navigateToCheckout();
 
     await checkout.fillBillingAddress(billing);
+    await expectBillingFieldsPopulated(checkout);
     await checkout.selectCashOnDelivery();
 
     await checkout.goToConfirmStep();
-    await expect(page.getByTestId('finish')).toBeAttached();
-    expect(await checkout.hasCheckoutLineItems()).toBeTruthy();
+    await expectCheckoutConfirmStep(page, checkout);
   });
 });

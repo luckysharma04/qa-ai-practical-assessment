@@ -1,6 +1,12 @@
-const { test, expect } = require('../../../Fixtures/testFixtures');
+const { test } = require('../../../Fixtures/testFixtures');
 const { defaultCustomer } = require('../../../Data/users');
-const { expectStatus } = require('../../../Utils/apiAssertions');
+const {
+  expectCartCreateResponse,
+  expectCartGetResponse,
+  expectDeleteCartResponse,
+  expectResourceId,
+  expectStatus,
+} = require('../../../Utils/apiAssertions');
 
 test.describe('API Cart Regression @Regression', () => {
   test('TC-API-RG-002 — add update and verify cart via GET /carts/{id}', async ({
@@ -13,11 +19,10 @@ test.describe('API Cart Regression @Regression', () => {
     apiServices.client.setToken(token);
 
     const createResponse = await apiServices.cart.createCart();
-    expectStatus(createResponse, 201);
-    const { id: cartId } = await createResponse.json();
+    const { id: cartId } = await expectCartCreateResponse(createResponse);
 
     const productId = await apiServices.product.getFirstInStockProductId();
-    expect(productId).toBeTruthy();
+    expectResourceId(productId, 'product id');
 
     const addResponse = await apiServices.cart.addProduct(cartId, productId, 1);
     expectStatus(addResponse, 200);
@@ -26,14 +31,14 @@ test.describe('API Cart Regression @Regression', () => {
     expectStatus(incrementResponse, 200);
 
     const getResponse = await apiServices.cart.getCart(cartId);
-    expectStatus(getResponse, 200);
-    const cart = await getResponse.json();
-
-    expect(cart.cart_items.length).toBeGreaterThan(0);
-    expect(cart.cart_items[0].product_id).toBe(productId);
-    expect(cart.cart_items[0].quantity).toBe(3);
+    await expectCartGetResponse(getResponse, {
+      cartId,
+      productId,
+      quantity: 3,
+      lineCount: 1,
+    });
 
     const deleteResponse = await apiServices.cart.deleteCart(cartId);
-    expect([200, 204]).toContain(deleteResponse.status());
+    await expectDeleteCartResponse(deleteResponse);
   });
 });

@@ -1,6 +1,7 @@
 const { test, expect } = require('../../../Fixtures/testFixtures');
 const { defaultCustomer } = require('../../../Data/users');
 const {
+  expectAccountPage,
   expectAuthenticated,
   expectUnauthenticated,
   expectProtectedRouteBlocked,
@@ -15,8 +16,7 @@ test.describe('Session Regression @Regression', () => {
     await loginPage.open();
     await loginPage.login(defaultCustomer.email, defaultCustomer.password);
 
-    await expect(page).toHaveURL(/\/account/);
-    await expect(page.getByTestId('page-title')).toContainText(/my account/i);
+    await expectAccountPage(page);
     await expectAuthenticated(page);
 
     await uiFlows.signOut();

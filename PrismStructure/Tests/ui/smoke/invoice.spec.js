@@ -1,6 +1,7 @@
-const { test, expect } = require('../../../Fixtures/testFixtures');
+const { test } = require('../../../Fixtures/testFixtures');
 const { defaultCustomer } = require('../../../Data/users');
 const { getAssessmentBilling } = require('../../../Utils/dataGenerator');
+const { expectInvoiceListPage } = require('../../../Utils/assertions');
 
 test.describe('Invoice Smoke @Smoke', () => {
   test('TC-UI-SM-INVOICE — generate invoice and verify My Invoices', async ({
@@ -15,10 +16,6 @@ test.describe('Invoice Smoke @Smoke', () => {
 
     const invoice = pages.invoicePage();
     await invoice.open();
-    await invoice.waitForInvoiceRows(1);
-
-    await expect(page.getByTestId('page-title')).toContainText(/invoice/i);
-    const rowCount = await invoice.getInvoiceRowCount();
-    expect(rowCount).toBeGreaterThan(0);
+    await expectInvoiceListPage(page, invoice, { minRows: 1, billing });
   });
 });
