@@ -21,7 +21,8 @@ class BasePage {
   }
 
   async waitForNetworkIdle() {
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForTimeout(300);
   }
 
   async fillTestId(testId, value) {
@@ -46,16 +47,27 @@ class BasePage {
   }
 
   async signOut() {
-    const signOut = this.page.getByRole('button', { name: /sign out|logout/i });
-    if (await signOut.isVisible()) {
-      await signOut.click();
-      return;
+    const navMenu = this.byTestId('nav-menu');
+    if (await navMenu.isVisible()) {
+      const menuButtons = navMenu.getByRole('button');
+      const buttonCount = await menuButtons.count();
+      if (buttonCount > 0) {
+        await menuButtons.nth(buttonCount - 1).click();
+        await this.page.waitForTimeout(500);
+      }
+    } else {
+      const profileBtn = this.page
+        .getByRole('button', { name: /\d{3}/ })
+        .or(this.page.getByRole('button', { name: /doe/i }));
+      await profileBtn.first().click();
+      await this.page.waitForTimeout(500);
     }
-    const menu = this.page.getByRole('button', { name: /jane|customer|account/i });
-    if (await menu.isVisible()) {
-      await menu.click();
-      await this.page.getByRole('link', { name: /sign out/i }).click();
-    }
+
+    await this.page.evaluate(() => {
+      const signOutLink = document.querySelector('[data-test="nav-sign-out"]');
+      if (signOutLink) signOutLink.click();
+    });
+    await this.page.waitForTimeout(1000);
   }
 }
 

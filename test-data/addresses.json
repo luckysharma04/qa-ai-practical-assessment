@@ -18,7 +18,8 @@
       "city": "Hesselbury",
       "state": "Florida",
       "country": "TG",
-      "postalCode": "1234AA"
+      "postalCode": "1234AA",
+      "houseNumber": "42"
     }
   },
   "validAddresses": [

@@ -28,9 +28,9 @@ function registrationUser() {
     street: faker.location.streetAddress(),
     city: faker.location.city(),
     state: faker.location.state(),
-    phone: faker.phone.number('##########'),
+    phone: faker.string.numeric(10),
     email: `testuser_${stamp}@example.com`,
-    password: valid.password,
+    password: `RegPass_${stamp}!xY9`,
   };
 }
 

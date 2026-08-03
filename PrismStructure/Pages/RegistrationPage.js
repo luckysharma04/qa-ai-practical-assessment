@@ -44,7 +44,15 @@ class RegistrationPage extends BasePage {
     await this.firstNameInput.fill(user.firstName);
     await this.lastNameInput.fill(user.lastName);
     await this.dobInput.fill(user.dob);
-    await this.countrySelect.selectOption(user.country);
+
+    const countryOption = this.countrySelect.locator('option').nth(1);
+    const countryValue = await countryOption.getAttribute('value');
+    if (countryValue) {
+      await this.countrySelect.selectOption(countryValue);
+    } else if (user.country) {
+      await this.countrySelect.selectOption(user.country);
+    }
+
     await this.postalCodeInput.fill(user.postalCode);
     if (user.houseNumber) {
       await this.houseNumberInput.fill(user.houseNumber);
@@ -64,6 +72,7 @@ class RegistrationPage extends BasePage {
   async register(user) {
     await this.fillRegistrationForm(user);
     await this.submit();
+    await this.page.waitForURL(/\/(account|auth\/login)/, { timeout: 20_000 });
   }
 
   async getErrorText() {

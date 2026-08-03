@@ -14,6 +14,7 @@ const { AuthApi } = require('../API/services/AuthApi');
 const { CartApi } = require('../API/services/CartApi');
 const { InvoiceApi } = require('../API/services/InvoiceApi');
 const { ProductApi } = require('../API/services/ProductApi');
+const { UiFlows } = require('../Utils/uiFlows');
 const { defaultCustomer } = require('../Data/users');
 
 /**
@@ -22,6 +23,9 @@ const { defaultCustomer } = require('../Data/users');
 const test = playwright.test.extend({
   pages: async ({ page }, use) => {
     await use(new PageFactory(page));
+  },
+  uiFlows: async ({ pages }, use) => {
+    await use(new UiFlows(pages));
   },
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));

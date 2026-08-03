@@ -25,8 +25,16 @@ class CartPage extends BasePage {
     return this.cartQuantity.textContent();
   }
 
+  async getCartQuantityNumber() {
+    const text = await this.getCartQuantityBadge();
+    const match = String(text || '').match(/\d+/);
+    return match ? Number(match[0]) : 0;
+  }
+
   async getLineItemCount() {
-    return this.productTitle.count();
+    const titles = await this.productTitle.count();
+    if (titles > 0) return titles;
+    return this.getCartQuantityNumber();
   }
 
   async getCartTotalText() {

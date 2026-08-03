@@ -39,10 +39,29 @@ class ProductPage extends BasePage {
   }
 
   async addToCart(quantity) {
+    await this.page.waitForURL(/\/product\//);
+    await this.addToCartButton.waitFor({ state: 'visible' });
+
     if (quantity !== undefined) {
       await this.setQuantity(quantity);
     }
+
+    const cartResponse = this.page.waitForResponse(
+      (response) => response.url().includes('/carts') && response.request().method() === 'POST',
+      { timeout: 20_000 }
+    );
+
     await this.addToCartButton.click();
+    const response = await cartResponse;
+    if (!response.ok()) {
+      throw new Error(`Add to cart failed with status ${response.status()}`);
+    }
+
+    await this.page.waitForResponse(
+      (res) => res.url().includes('/carts') && res.request().method() === 'GET',
+      { timeout: 10_000 }
+    ).catch(() => null);
+    await this.page.waitForTimeout(500);
   }
 
   async isOutOfStock() {

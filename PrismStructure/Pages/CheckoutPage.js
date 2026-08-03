@@ -17,80 +17,115 @@ class CheckoutPage extends BasePage {
     this.proceed2 = this.byTestId('proceed-2');
     this.proceed3 = this.byTestId('proceed-3');
     this.cartTotal = this.byTestId('cart-total');
+    this.productTitle = this.byTestId('product-title');
   }
 
   async open() {
     await this.goto(ROUTES.checkout);
     await this.waitForNetworkIdle();
+    await this.productTitle.first().waitFor({ state: 'visible', timeout: 20_000 });
   }
 
-  async clickProceedSteps() {
-    const steps = [this.proceed1, this.proceed2, this.proceed3];
-    for (const step of steps) {
-      if (await step.isVisible()) {
+  async clickProceed(stepLocator) {
+    if (await stepLocator.isVisible() && !(await stepLocator.isDisabled())) {
+      await stepLocator.click();
+      await this.page.waitForTimeout(800);
+      return true;
+    }
+    return false;
+  }
+
+  async clickEnabledProceed() {
+    for (const step of [this.proceed1, this.proceed2, this.proceed3]) {
+      if (await step.isVisible() && !(await step.isDisabled())) {
         await step.click();
-        await this.page.waitForTimeout(300);
+        await this.page.waitForTimeout(800);
+        return true;
       }
     }
+    return false;
+  }
+
+  async fillField(locator, value) {
+    if (!value) return;
+    const tagName = await locator.evaluate((el) => el.tagName.toLowerCase());
+    if (tagName === 'select') {
+      await locator.selectOption(value);
+      return;
+    }
+    await locator.fill(value, { force: true });
+  }
+
+  async goToBillingStep() {
+    await this.clickProceed(this.proceed1);
+    await this.clickProceed(this.proceed2);
+    await this.streetInput.waitFor({ state: 'visible', timeout: 15_000 });
   }
 
   /**
    * @param {object} billing
-   * @param {string} billing.street
-   * @param {string} billing.city
-   * @param {string} billing.state
-   * @param {string} billing.country
-   * @param {string} billing.postalCode
-   * @param {string} [billing.houseNumber]
    */
   async fillBillingAddress(billing) {
-    await this.clickProceedSteps();
-    if (await this.streetInput.isVisible()) {
-      await this.streetInput.fill(billing.street);
-    }
-    if (await this.cityInput.isVisible()) {
-      await this.cityInput.fill(billing.city);
-    }
-    if (await this.stateInput.isVisible()) {
-      await this.stateInput.fill(billing.state);
-    }
-    if (await this.countryInput.isVisible()) {
-      await this.countryInput.fill(billing.country);
-    }
-    if (await this.postalCodeInput.isVisible()) {
-      await this.postalCodeInput.fill(billing.postalCode);
-    }
-    if (billing.houseNumber && await this.houseNumberInput.isVisible()) {
-      await this.houseNumberInput.fill(billing.houseNumber);
-    }
+    await this.goToBillingStep();
+
+    await this.fillField(this.streetInput, billing.street);
+    await this.fillField(this.cityInput, billing.city);
+    await this.fillField(this.stateInput, billing.state);
+    await this.fillField(this.countryInput, billing.country);
+    await this.fillField(this.postalCodeInput, billing.postalCode);
+    await this.fillField(this.houseNumberInput, billing.houseNumber || '42');
+    await this.postalCodeInput.press('Tab');
+    await this.page.waitForTimeout(400);
+
+    await this.clickEnabledProceed();
+    await this.page.waitForTimeout(500);
   }
 
   async selectCashOnDelivery() {
-    await this.clickProceedSteps();
-    if (await this.paymentMethodSelect.isVisible()) {
-      await this.paymentMethodSelect.selectOption(PAYMENT_METHOD.cashOnDelivery);
-    }
+    await this.paymentMethodSelect.waitFor({ state: 'visible', timeout: 15_000 });
+    await this.paymentMethodSelect.selectOption(PAYMENT_METHOD.cashOnDelivery);
+    await this.clickEnabledProceed();
+  }
+
+  async goToConfirmStep() {
+    await this.finishButton.waitFor({ state: 'attached', timeout: 15_000 });
+    await this.page.waitForFunction(
+      (selector) => {
+        const el = document.querySelector(`[data-test="${selector}"]`);
+        return el && !el.disabled;
+      },
+      'finish',
+      { timeout: 15_000 }
+    );
   }
 
   /** Assessment: invoice requires two Confirm/Finish actions. */
   async confirmInvoiceTwice() {
-    await this.clickProceedSteps();
-    await this.finishButton.click();
-    await this.page.waitForTimeout(500);
-    if (await this.finishButton.isVisible()) {
-      await this.finishButton.click();
+    await this.goToConfirmStep();
+
+    const invoiceResponse = this.page.waitForResponse(
+      (response) => response.url().includes('/invoices') && response.request().method() === 'POST',
+      { timeout: 20_000 }
+    );
+
+    await this.finishButton.click({ force: true });
+    await invoiceResponse.catch(() => null);
+    await this.page.waitForTimeout(600);
+
+    if (await this.finishButton.isVisible() && !(await this.finishButton.isDisabled())) {
+      await this.finishButton.click({ force: true });
     }
+    await this.waitForNetworkIdle();
   }
 
-  /**
-   * Full COD checkout through double confirm.
-   * @param {object} billing - see fillBillingAddress
-   */
   async completeCashOnDeliveryCheckout(billing) {
     await this.fillBillingAddress(billing);
     await this.selectCashOnDelivery();
     await this.confirmInvoiceTwice();
-    await this.waitForNetworkIdle();
+  }
+
+  async hasCheckoutLineItems() {
+    return (await this.productTitle.count()) > 0;
   }
 }
 

@@ -16,7 +16,7 @@ class HomePage extends BasePage {
 
   async open() {
     await this.goto(ROUTES.home);
-    await this.waitForNetworkIdle();
+    await this.productNames.first().waitFor({ state: 'visible', timeout: 20_000 });
   }
 
   async getProductCount() {
@@ -48,7 +48,7 @@ class HomePage extends BasePage {
 
   async openFirstProduct() {
     await this.productNames.first().click();
-    await this.waitForNetworkIdle();
+    await this.page.waitForURL(/\/product\//);
   }
 
   async openProductByIndex(index = 0) {

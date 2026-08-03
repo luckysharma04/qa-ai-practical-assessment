@@ -14,6 +14,15 @@ class InvoicePage extends BasePage {
   async open() {
     await this.goto(ROUTES.invoices);
     await this.waitForNetworkIdle();
+    await this.pageTitle.waitFor({ state: 'visible', timeout: 15_000 });
+  }
+
+  async waitForInvoiceRows(minRows = 1) {
+    await this.page.waitForFunction(
+      (min) => document.querySelectorAll('table tbody tr').length >= min,
+      minRows,
+      { timeout: 20_000 }
+    );
   }
 
   async getTitle() {
