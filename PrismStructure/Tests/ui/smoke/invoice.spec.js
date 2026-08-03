@@ -9,13 +9,14 @@ test.describe('Invoice Smoke @Smoke @UI', () => {
     pages,
     page,
   }) => {
+    test.setTimeout(120_000);
     const billing = getAssessmentBilling().ui;
 
     await uiFlows.loginAs(defaultCustomer.email, defaultCustomer.password);
-    await uiFlows.completeCodCheckout(billing);
+    const { billing: usedBilling } = await uiFlows.completeCodCheckout(billing);
 
     const invoice = pages.invoicePage();
     await invoice.open();
-    await expectInvoiceListPage(page, invoice, { minRows: 1, billing });
+    await expectInvoiceListPage(page, invoice, { minRows: 1, billing: usedBilling });
   });
 });

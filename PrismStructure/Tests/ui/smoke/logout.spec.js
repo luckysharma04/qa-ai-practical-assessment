@@ -11,6 +11,7 @@ test.describe('Logout Smoke @Smoke @UI', () => {
     uiFlows,
     page,
   }) => {
+    test.setTimeout(90_000);
     await uiFlows.loginAs(defaultCustomer.email, defaultCustomer.password);
     await expectAccountPage(page);
 

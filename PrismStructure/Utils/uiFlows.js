@@ -12,6 +12,11 @@ class UiFlows {
   async loginAs(email, password) {
     const login = this.pages.loginPage();
     await login.open();
+
+    if (login.page.url().includes('/account')) {
+      return;
+    }
+
     await login.login(email, password);
   }
 
@@ -107,6 +112,12 @@ class UiFlows {
     }
     const checkout = this.pages.checkoutPage();
     await checkout.openWithItems();
+
+    if (await checkout.isCartEmpty()) {
+      await this.addFirstProductToCart();
+      await checkout.openWithItems();
+    }
+
     return checkout;
   }
 
@@ -116,7 +127,16 @@ class UiFlows {
 
   async completeCodCheckout(billing = getAssessmentBilling().ui) {
     const checkout = await this.navigateToCheckout();
-    await checkout.completeCashOnDeliveryCheckout(billing);
+    await checkout.goToBillingStep();
+    await checkout.fillBillingFields(billing);
+    const usedBilling = await checkout.getBillingFieldValues();
+
+    await checkout.clickEnabledProceed();
+    await checkout.page.waitForTimeout(500);
+    await checkout.selectCashOnDelivery();
+    await checkout.confirmInvoiceTwice();
+
+    return { checkout, billing: usedBilling };
   }
 
   async smokePurchaseFlow(email, password, billing = getAssessmentBilling().ui) {

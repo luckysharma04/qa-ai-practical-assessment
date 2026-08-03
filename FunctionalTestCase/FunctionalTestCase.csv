@@ -1,40 +1,40 @@
 Test ID,Module,Scenario,Precondition,Test Steps,Expected Result,Priority,Smoke/Regression,Positive/Negative/Edge,Status
 TC-M-001,Catalog,Verify home page loads and displays product catalog (Smoke),Browser is open and internet access is available,"1. Navigate to https://practicesoftwaretesting.com/
 2. Wait for the page to load completely
-3. Observe the product listing on the home page","Home page loads without errors. Product names and prices are visible. No critical error message is displayed.",P1,Smoke,Positive,Not Executed
+3. Observe the product listing on the home page","Home page loads without errors. Product names and prices are visible. No critical error message is displayed.",P1,Smoke,Positive,Passed
 TC-M-002,Authentication,Verify registered user can log in with valid credentials (Smoke),User account exists (customer@practicesoftwaretesting.com / welcome01). User is not logged in,"1. Navigate to https://practicesoftwaretesting.com/
 2. Open the login page
 3. Enter email: customer@practicesoftwaretesting.com
 4. Enter password: welcome01
-5. Click Login or Sign In","User logs in successfully. Authenticated UI is shown (e.g. account menu or Logout). No login error is displayed.",P1,Smoke,Positive,Not Executed
+5. Click Login or Sign In","User logs in successfully. Authenticated UI is shown (e.g. account menu or Logout). No login error is displayed.",P1,Smoke,Positive,Passed
 TC-M-003,Checkout,Verify smoke E2E purchase: add to cart COD checkout double-confirm invoice and My Invoices (Smoke),User is logged in or can log in with default customer. Catalog has products,"1. Log in with valid credentials
 2. Add one product to the cart from the catalog
 3. Proceed to checkout
 4. Enter valid billing: Street Zoey Shore City Hesselbury State Florida Country TG Postal Code 1234AA
 5. Select Cash on Delivery
 6. On invoice confirmation click Confirm twice
-7. Navigate to My Invoices and open the latest invoice","Product is in cart. Checkout accepts billing and COD. Invoice is created only after second Confirm. Invoice appears in My Invoices with correct items and billing details.",P1,Smoke,Positive,Not Executed
+7. Navigate to My Invoices and open the latest invoice","Product is in cart. Checkout accepts billing and COD. Invoice is created only after second Confirm. Invoice appears in My Invoices with correct items and billing details.",P1,Smoke,Positive,Passed
 TC-M-004,Registration,Verify new user registration and profile information (Regression),User is not logged in. Unique email available (testuser_<timestamp>@example.com),"1. Navigate to the registration page
 2. Register with valid unique email password and required profile fields
 3. Log in with the new credentials
-4. Open Profile or account details","Registration succeeds. Login with new credentials works. Profile displays information matching registration data.",P1,Regression,Positive,Not Executed
+4. Open Profile or account details","Registration succeeds. Login with new credentials works. Profile displays information matching registration data.",P1,Regression,Positive,Passed
 TC-M-005,Catalog,Verify search filter multi-item cart and quantity update (Regression),User is logged in. Multiple products and filters are available on catalog,"1. Log in with valid credentials
 2. Search for a product term and review results
 3. Apply a category or brand filter and review the listing
 4. Add two different products to the cart
 5. Open cart and increase quantity of one item
-6. Verify cart totals and line items","Search and filter update the listing without error. Both products appear in cart. Quantity update reflects correctly in cart display and totals.",P1,Regression,Positive,Not Executed
+6. Verify cart totals and line items","Search and filter update the listing without error. Both products appear in cart. Quantity update reflects correctly in cart display and totals.",P1,Regression,Positive,Passed
 TC-M-006,Authentication,Verify login and logout session handling (Regression),Registered user exists. User is not logged in,"1. Log in with valid credentials
 2. Confirm authenticated state
 3. Click Logout or Sign Out
-4. Attempt to open My Invoices or Profile without logging in again","Login succeeds. Logout ends the session. Protected pages are not accessible after logout without a new login.",P1,Regression,Positive,Not Executed
+4. Attempt to open My Invoices or Profile without logging in again","Login succeeds. Logout ends the session. Protected pages are not accessible after logout without a new login.",P1,Regression,Positive,Passed
 TC-M-007,Authentication,Verify invalid login and duplicate registration are rejected (Regression),Known user customer@practicesoftwaretesting.com exists. User is not logged in,"1. Attempt login with valid email and wrong password
 2. Observe error message and session state
 3. Navigate to registration
 4. Attempt to register using email customer@practicesoftwaretesting.com
-5. Submit the registration form","Invalid login is rejected with clear error; no session is created. Duplicate registration fails with clear error; no second account is created for the same email.",P1,Regression,Negative,Not Executed
+5. Submit the registration form","Invalid login is rejected with clear error; no session is created. Duplicate registration fails with clear error; no second account is created for the same email.",P1,Regression,Negative,Passed
 TC-M-008,Checkout,Verify checkout and invoice failures for empty cart invalid billing and single Confirm (Regression),User is logged in,"1. With an empty cart attempt to proceed to checkout
 2. Add a product to cart then go to checkout
 3. Leave a required billing field empty or invalid and attempt to proceed
 4. Complete valid billing and COD then click Confirm only once on invoice screen
-5. Check My Invoices without second Confirm","Empty cart checkout is blocked or shows error. Invalid or missing billing blocks checkout with validation feedback. Invoice is not fully created in My Invoices after only one Confirm click.",P1,Regression,Negative,Not Executed
+5. Check My Invoices without second Confirm","Empty cart checkout is blocked or shows error. Invalid or missing billing blocks checkout with validation feedback. Invoice is not fully created in My Invoices after only one Confirm click.",P1,Regression,Negative,Passed

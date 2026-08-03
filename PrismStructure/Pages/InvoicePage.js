@@ -1,3 +1,4 @@
+const { expect } = require('@playwright/test');
 const { BasePage } = require('./BasePage');
 const { ROUTES } = require('../Config/constants');
 
@@ -40,14 +41,29 @@ class InvoicePage extends BasePage {
 
   async openLatestInvoiceDetails() {
     const detailsLink = this.invoiceRows.first().getByRole('link', { name: /details/i });
-    if (await detailsLink.isVisible()) {
-      await detailsLink.click();
-      await this.waitForNetworkIdle();
-    }
+    await detailsLink.click();
+    await this.page.waitForURL(/\/account\/invoices\//, { timeout: 15_000 });
+    await this.waitForNetworkIdle();
+  }
+
+  async expectLatestInvoiceBilling(billing) {
+    await expect(this.page.getByRole('textbox', { name: 'Street' })).toHaveValue(billing.street);
+    await expect(this.page.getByRole('textbox', { name: 'City' })).toHaveValue(billing.city);
+    await expect(this.page.getByRole('textbox', { name: 'Postal code' })).toHaveValue(
+      billing.postalCode
+    );
   }
 
   async hasInvoiceWithText(text) {
-    return this.invoiceTable.getByText(text, { exact: false }).isVisible();
+    const match = this.invoiceTable.getByText(text, { exact: false });
+    const count = await match.count();
+    if (count === 0) return false;
+    return match.first().isVisible();
+  }
+
+  async getLatestInvoiceBillingText() {
+    const billingCell = this.invoiceRows.first().locator('td').nth(1);
+    return billingCell.textContent();
   }
 
   async goToNextPage() {

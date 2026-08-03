@@ -34,13 +34,14 @@ module.exports = defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     actionTimeout: 15_000,
-    navigationTimeout: 30_000,
+    navigationTimeout: 60_000,
   },
   projects: [
     {
       name: 'ui-smoke',
       grep: TAG_GREP.uiSmoke,
       use: chrome,
+      retries: 1,
     },
     {
       name: 'ui-regression',

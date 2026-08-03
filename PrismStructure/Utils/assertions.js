@@ -142,8 +142,10 @@ async function expectInvoiceListPage(page, invoicePage, {
   expect(invoiceNumber.trim()).toMatch(INVOICE_NUMBER_PATTERN);
 
   if (billing) {
-    expect(await invoicePage.hasInvoiceWithText(billing.city)).toBe(true);
-    expect(await invoicePage.hasInvoiceWithText(billing.postalCode)).toBe(true);
+    const latestBilling = await invoicePage.getLatestInvoiceBillingText();
+    expect(latestBilling).toContain(billing.street);
+    await invoicePage.openLatestInvoiceDetails();
+    await invoicePage.expectLatestInvoiceBilling(billing);
   }
 }
 

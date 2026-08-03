@@ -1,19 +1,47 @@
-<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="10.048447">
-<testsuite name="API\tests\smoke\auth.spec.js" timestamp="2026-08-03T13:09:18.672Z" hostname="api-smoke" tests="1" failures="0" skipped="0" time="0.837" errors="0">
-<testcase name="API Auth Smoke @Smoke @API › TC-API-SM-002 — login returns access_token" classname="API\tests\smoke\auth.spec.js" time="0.837">
+<testsuites id="" name="" tests="10" failures="0" skipped="0" errors="0" time="245.553339">
+<testsuite name="Tests\ui\smoke\auth.spec.js" timestamp="2026-08-03T16:07:00.541Z" hostname="ui-smoke" tests="1" failures="0" skipped="0" time="6.274" errors="0">
+<testcase name="Login Smoke @Smoke @UI › TC-UI-SM-LOGIN — login with valid customer credentials" classname="Tests\ui\smoke\auth.spec.js" time="6.274">
+</testcase>
+</testsuite>
+<testsuite name="Tests\ui\smoke\cart.spec.js" timestamp="2026-08-03T16:07:00.541Z" hostname="ui-smoke" tests="1" failures="0" skipped="0" time="21.881" errors="0">
+<testcase name="Cart Smoke @Smoke @UI › TC-UI-SM-CART — add product to cart and verify line item" classname="Tests\ui\smoke\cart.spec.js" time="21.881">
+</testcase>
+</testsuite>
+<testsuite name="Tests\ui\smoke\checkout.spec.js" timestamp="2026-08-03T16:07:00.541Z" hostname="ui-smoke" tests="1" failures="0" skipped="0" time="88.039" errors="0">
+<testcase name="Checkout Smoke @Smoke @UI › TC-UI-SM-CHECKOUT — complete COD checkout billing and payment steps" classname="Tests\ui\smoke\checkout.spec.js" time="88.039">
+</testcase>
+</testsuite>
+<testsuite name="Tests\ui\smoke\invoice.spec.js" timestamp="2026-08-03T16:07:00.541Z" hostname="ui-smoke" tests="1" failures="0" skipped="0" time="83.842" errors="0">
+<testcase name="Invoice Smoke @Smoke @UI › TC-UI-SM-INVOICE — generate invoice and verify My Invoices" classname="Tests\ui\smoke\invoice.spec.js" time="83.842">
+</testcase>
+</testsuite>
+<testsuite name="Tests\ui\smoke\logout.spec.js" timestamp="2026-08-03T16:07:00.541Z" hostname="ui-smoke" tests="1" failures="0" skipped="0" time="16.791" errors="0">
+<testcase name="Logout Smoke @Smoke @UI › TC-UI-SM-LOGOUT — logout ends session and blocks protected routes" classname="Tests\ui\smoke\logout.spec.js" time="16.791">
+</testcase>
+</testsuite>
+<testsuite name="Tests\ui\smoke\registration.spec.js" timestamp="2026-08-03T16:07:00.541Z" hostname="ui-smoke" tests="1" failures="0" skipped="0" time="13.718" errors="0">
+<testcase name="Registration Smoke @Smoke @UI › TC-UI-SM-REG — register new user and access account" classname="Tests\ui\smoke\registration.spec.js" time="13.718">
+</testcase>
+</testsuite>
+<testsuite name="Tests\ui\smoke\search.spec.js" timestamp="2026-08-03T16:07:00.541Z" hostname="ui-smoke" tests="1" failures="0" skipped="0" time="4.066" errors="0">
+<testcase name="Product Search Smoke @Smoke @UI › TC-UI-SM-SEARCH — search returns product results" classname="Tests\ui\smoke\search.spec.js" time="4.066">
+</testcase>
+</testsuite>
+<testsuite name="API\tests\smoke\auth.spec.js" timestamp="2026-08-03T16:07:00.541Z" hostname="api-smoke" tests="1" failures="0" skipped="0" time="0.75" errors="0">
+<testcase name="API Auth Smoke @Smoke @API › TC-API-SM-002 — login returns access_token" classname="API\tests\smoke\auth.spec.js" time="0.75">
 <system-out>
 <![CDATA[[API] POST /users/login → 200
 ]]>
 </system-out>
 <system-err>
-<![CDATA[(node:31608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+<![CDATA[(node:3336) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
 ]]>
 </system-err>
 </testcase>
 </testsuite>
-<testsuite name="API\tests\smoke\e2e-purchase.spec.js" timestamp="2026-08-03T13:09:18.672Z" hostname="api-smoke" tests="1" failures="0" skipped="0" time="6.818" errors="0">
-<testcase name="API E2E Purchase Smoke @Smoke @API › TC-API-SM-003 — register login cart product invoice and cleanup" classname="API\tests\smoke\e2e-purchase.spec.js" time="6.818">
+<testsuite name="API\tests\smoke\e2e-purchase.spec.js" timestamp="2026-08-03T16:07:00.541Z" hostname="api-smoke" tests="1" failures="0" skipped="0" time="6.043" errors="0">
+<testcase name="API E2E Purchase Smoke @Smoke @API › TC-API-SM-003 — register login cart product invoice and cleanup" classname="API\tests\smoke\e2e-purchase.spec.js" time="6.043">
 <system-out>
 <![CDATA[[STEP] Register user
 [API] POST /users/register → 201
@@ -26,21 +54,21 @@
 [API] GET /products → 200
 [API] GET /products → 200
 [STEP] Add product to cart
-[API] POST /carts/01kz3vxb1rtmqc6jcr0m11rk99 → 200
+[API] POST /carts/01kz469xvd5khyagr0pba66nt2 → 200
 [STEP] Verify cart
-[API] GET /carts/01kz3vxb1rtmqc6jcr0m11rk99 → 200
+[API] GET /carts/01kz469xvd5khyagr0pba66nt2 → 200
 [STEP] Generate invoice
 [API] POST /invoices → 201
 [STEP] Verify invoice list
 [API] GET /invoices → 200
 [STEP] Delete test cart
-[API] DELETE /carts/01kz3vxb1rtmqc6jcr0m11rk99 → 204
+[API] DELETE /carts/01kz469xvd5khyagr0pba66nt2 → 204
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="API\tests\smoke\products.spec.js" timestamp="2026-08-03T13:09:18.672Z" hostname="api-smoke" tests="1" failures="0" skipped="0" time="0.645" errors="0">
-<testcase name="API Products Smoke @Smoke @API › TC-API-SM-001 — GET /products returns catalog" classname="API\tests\smoke\products.spec.js" time="0.645">
+<testsuite name="API\tests\smoke\products.spec.js" timestamp="2026-08-03T16:07:00.541Z" hostname="api-smoke" tests="1" failures="0" skipped="0" time="0.581" errors="0">
+<testcase name="API Products Smoke @Smoke @API › TC-API-SM-001 — GET /products returns catalog" classname="API\tests\smoke\products.spec.js" time="0.581">
 <system-out>
 <![CDATA[[API] GET /products → 200
 ]]>

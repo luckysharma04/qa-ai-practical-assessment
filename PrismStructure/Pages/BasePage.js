@@ -12,8 +12,20 @@ class BasePage {
     return this.page.getByTestId(testId);
   }
 
-  async goto(path = '/') {
-    await this.page.goto(path);
+  async goto(path = '/', { retries = 2 } = {}) {
+    for (let attempt = 0; attempt <= retries; attempt += 1) {
+      try {
+        await this.page.goto(path, {
+          waitUntil: 'domcontentloaded',
+          timeout: 45_000,
+        });
+        await this.waitForLoad();
+        return;
+      } catch (error) {
+        if (attempt === retries) throw error;
+        await this.page.waitForTimeout(2_000);
+      }
+    }
   }
 
   async waitForLoad() {

@@ -14,7 +14,18 @@ class LoginPage extends BasePage {
 
   async open() {
     await this.goto(ROUTES.login);
-    await this.emailInput.waitFor({ state: 'visible', timeout: 20_000 });
+
+    if (this.page.url().includes('/account')) {
+      return;
+    }
+
+    try {
+      await this.emailInput.waitFor({ state: 'visible', timeout: 15_000 });
+    } catch {
+      await this.page.goto(ROUTES.login, { waitUntil: 'domcontentloaded' });
+      await this.waitForLoad();
+      await this.emailInput.waitFor({ state: 'visible', timeout: 20_000 });
+    }
   }
 
   async openFromNav() {

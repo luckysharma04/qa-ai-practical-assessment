@@ -27,7 +27,12 @@ class CheckoutPage extends BasePage {
 
   async openWithItems() {
     await this.open();
-    await this.productTitle.first().waitFor({ state: 'visible', timeout: 20_000 });
+    try {
+      await this.productTitle.first().waitFor({ state: 'visible', timeout: 30_000 });
+    } catch {
+      await this.page.reload({ waitUntil: 'domcontentloaded' });
+      await this.productTitle.first().waitFor({ state: 'visible', timeout: 30_000 });
+    }
   }
 
   async openEmpty() {
@@ -63,10 +68,35 @@ class CheckoutPage extends BasePage {
     if (!value) return;
     const tagName = await locator.evaluate((el) => el.tagName.toLowerCase());
     if (tagName === 'select') {
-      await locator.selectOption(value);
+      try {
+        await locator.selectOption(value);
+      } catch {
+        await locator.selectOption({ label: value });
+      }
+      await this.page.waitForTimeout(200);
       return;
     }
+    await locator.focus();
+    await locator.clear();
     await locator.fill(value, { force: true });
+    await locator.evaluate((el, val) => {
+      el.value = val;
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+      el.dispatchEvent(new Event('change', { bubbles: true }));
+      el.dispatchEvent(new Event('blur', { bubbles: true }));
+    }, value);
+    await this.page.waitForTimeout(150);
+  }
+
+  async getBillingFieldValues() {
+    return {
+      street: await this.streetInput.inputValue(),
+      city: await this.cityInput.inputValue(),
+      state: await this.stateInput.inputValue(),
+      country: await this.countryInput.inputValue(),
+      postalCode: await this.postalCodeInput.inputValue(),
+      houseNumber: await this.houseNumberInput.inputValue(),
+    };
   }
 
   async goToBillingStep() {
@@ -75,20 +105,23 @@ class CheckoutPage extends BasePage {
     await this.streetInput.waitFor({ state: 'visible', timeout: 15_000 });
   }
 
+  async fillBillingFields(billing) {
+    await this.fillField(this.streetInput, billing.street);
+    await this.fillField(this.cityInput, billing.city);
+    await this.fillField(this.countryInput, billing.country);
+    await this.fillField(this.stateInput, billing.state);
+    await this.fillField(this.postalCodeInput, billing.postalCode);
+    await this.fillField(this.houseNumberInput, billing.houseNumber || '42');
+    await this.postalCodeInput.press('Tab');
+    await this.page.waitForTimeout(400);
+  }
+
   /**
    * @param {object} billing
    */
   async fillBillingAddress(billing) {
     await this.goToBillingStep();
-
-    await this.fillField(this.streetInput, billing.street);
-    await this.fillField(this.cityInput, billing.city);
-    await this.fillField(this.stateInput, billing.state);
-    await this.fillField(this.countryInput, billing.country);
-    await this.fillField(this.postalCodeInput, billing.postalCode);
-    await this.fillField(this.houseNumberInput, billing.houseNumber || '42');
-    await this.postalCodeInput.press('Tab');
-    await this.page.waitForTimeout(400);
+    await this.fillBillingFields(billing);
 
     await this.clickEnabledProceed();
     await this.page.waitForTimeout(500);
