@@ -23,6 +23,12 @@ class InvoiceApi {
     logApi('GET', '/invoices', response.status());
     return response;
   }
+
+  async getInvoice(invoiceId) {
+    const response = await this.client.get(`/invoices/${invoiceId}`);
+    logApi('GET', `/invoices/${invoiceId}`, response.status());
+    return response;
+  }
 }
 
 module.exports = { InvoiceApi };

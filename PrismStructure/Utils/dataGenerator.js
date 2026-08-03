@@ -62,11 +62,43 @@ function getBoundaryCart() {
   return loadJson('boundary-values.json').cart;
 }
 
+function getApiInvoiceBilling() {
+  const ref = loadJson('addresses.json').assessmentReference;
+  return {
+    billing_street: ref.billing_street,
+    billing_city: ref.billing_city,
+    billing_state: ref.billing_state,
+    billing_country: ref.billing_country,
+    billing_postal_code: ref.billing_postal_code,
+  };
+}
+
+function apiRegistrationPayload() {
+  const user = registrationUser();
+  return {
+    first_name: user.firstName,
+    last_name: user.lastName,
+    email: user.email,
+    password: user.password,
+    dob: user.dob,
+    phone: user.phone,
+    address: {
+      street: user.street,
+      city: user.city,
+      state: user.state,
+      country: 'US',
+      postal_code: user.postalCode,
+    },
+  };
+}
+
 module.exports = {
   uniqueEmail,
   registrationUser,
   getStaticCustomer,
   getAssessmentBilling,
+  getApiInvoiceBilling,
+  apiRegistrationPayload,
   getInvalidLoginCase,
   getInvalidRegistrationCase,
   getNegativeApiCase,

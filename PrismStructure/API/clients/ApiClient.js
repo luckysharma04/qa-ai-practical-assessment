@@ -34,6 +34,13 @@ class ApiClient {
     });
   }
 
+  async delete(path, options = {}) {
+    return this.request.delete(`${this.baseURL}${path}`, {
+      headers: this.headers(options.headers),
+      ...options,
+    });
+  }
+
   async put(path, data, options = {}) {
     return this.request.put(`${this.baseURL}${path}`, {
       headers: this.headers(options.headers),

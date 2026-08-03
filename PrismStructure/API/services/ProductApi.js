@@ -11,11 +11,12 @@ class ProductApi {
     return response;
   }
 
-  async getFirstProductId() {
+  async getFirstInStockProductId() {
     const response = await this.listProducts();
     const body = await response.json();
     const products = body.data || body;
-    return products[0]?.id;
+    const inStock = products.find((p) => p.in_stock !== false && p.stock > 0);
+    return (inStock || products[0])?.id;
   }
 }
 

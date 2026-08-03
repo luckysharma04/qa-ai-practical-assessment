@@ -56,6 +56,22 @@ const test = playwright.test.extend({
     await use(client);
     await client.request.dispose();
   },
+  apiServices: async ({}, use) => {
+    const client = await ApiClient.create();
+    const services = {
+      client,
+      auth: new AuthApi(client),
+      cart: new CartApi(client),
+      invoice: new InvoiceApi(client),
+      product: new ProductApi(client),
+    };
+    await use(services);
+    await client.request.dispose();
+  },
+  apiFlows: async ({ apiServices }, use) => {
+    const { ApiFlows } = require('../Utils/apiFlows');
+    await use(new ApiFlows(apiServices));
+  },
   authenticatedApi: async ({}, use) => {
     const client = await ApiClient.create();
     const authApi = new AuthApi(client);
