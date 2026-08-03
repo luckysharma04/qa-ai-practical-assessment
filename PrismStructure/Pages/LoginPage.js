@@ -14,7 +14,7 @@ class LoginPage extends BasePage {
 
   async open() {
     await this.goto(ROUTES.login);
-    await this.waitForNetworkIdle();
+    await this.emailInput.waitFor({ state: 'visible', timeout: 20_000 });
   }
 
   async openFromNav() {
@@ -28,6 +28,11 @@ class LoginPage extends BasePage {
 
   async submit() {
     await this.loginButton.click();
+  }
+
+  async attemptLogin(email, password) {
+    await this.fillCredentials(email, password);
+    await this.submit();
   }
 
   async login(email, password) {

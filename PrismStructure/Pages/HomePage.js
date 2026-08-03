@@ -53,7 +53,7 @@ class HomePage extends BasePage {
 
   async openProductByIndex(index = 0) {
     await this.productNames.nth(index).click();
-    await this.waitForNetworkIdle();
+    await this.page.waitForURL(/\/product\//);
   }
 
   async clickCategory(testId) {

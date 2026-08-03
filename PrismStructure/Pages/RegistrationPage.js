@@ -22,7 +22,7 @@ class RegistrationPage extends BasePage {
 
   async open() {
     await this.goto(ROUTES.register);
-    await this.waitForNetworkIdle();
+    await this.firstNameInput.waitFor({ state: 'visible', timeout: 20_000 });
   }
 
   /**

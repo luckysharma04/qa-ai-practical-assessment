@@ -27,12 +27,69 @@ class UiFlows {
     await home.search(query);
   }
 
-  async addFirstProductToCart() {
+  async addProductByIndex(index = 0) {
     const home = this.pages.homePage();
     const product = this.pages.productPage();
     await home.open();
-    await home.openFirstProduct();
+    await home.openProductByIndex(index);
     await product.addToCart();
+    return product;
+  }
+
+  async addMultipleProductsToCart(count = 2) {
+    const home = this.pages.homePage();
+    const product = this.pages.productPage();
+    await home.open();
+
+    let added = 0;
+    const productCount = await home.getProductCount();
+
+    for (let index = 0; index < productCount && added < count; index += 1) {
+      await home.openProductByIndex(index);
+      if (!(await product.isAvailableForCart())) {
+        await home.open();
+        continue;
+      }
+      await product.addToCart();
+      added += 1;
+      await home.open();
+    }
+
+    if (added < count) {
+      throw new Error(`Expected ${count} cart items but added ${added}`);
+    }
+  }
+
+  async registerAndLogin(user) {
+    await this.registerUser(user);
+    const page = this.pages.homePage().page;
+    if (!page.url().includes('/account')) {
+      await this.loginAs(user.email, user.password);
+    }
+    return user;
+  }
+
+  async addInStockProductToCart() {
+    const home = this.pages.homePage();
+    const product = this.pages.productPage();
+    await home.open();
+    const productCount = await home.getProductCount();
+
+    for (let index = 0; index < productCount; index += 1) {
+      await home.openProductByIndex(index);
+      if (!(await product.isAvailableForCart())) {
+        await home.open();
+        continue;
+      }
+      await product.addToCart();
+      return product;
+    }
+
+    throw new Error('No in-stock product available to add to cart');
+  }
+
+  async addFirstProductToCart() {
+    return this.addInStockProductToCart();
   }
 
   async openCartWithItems() {
@@ -42,11 +99,19 @@ class UiFlows {
     return cart;
   }
 
-  async navigateToCheckout() {
-    await this.addFirstProductToCart();
+  async navigateToCheckoutWithItems(itemCount = 1) {
+    if (itemCount > 1) {
+      await this.addMultipleProductsToCart(itemCount);
+    } else {
+      await this.addFirstProductToCart();
+    }
     const checkout = this.pages.checkoutPage();
-    await checkout.open();
+    await checkout.openWithItems();
     return checkout;
+  }
+
+  async navigateToCheckout() {
+    return this.navigateToCheckoutWithItems(1);
   }
 
   async completeCodCheckout(billing = getAssessmentBilling().ui) {

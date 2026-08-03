@@ -46,6 +46,14 @@ function getInvalidLoginCase(id) {
   return loadJson('users-invalid.json').login.find((c) => c.id === id);
 }
 
+function getInvalidRegistrationCase(id) {
+  return loadJson('users-invalid.json').registration.find((c) => c.id === id);
+}
+
+function getSearchTerm(index = 1) {
+  return loadJson('products.json').searchTerms.valid[index];
+}
+
 function getNegativeApiCase(id) {
   return loadJson('negative-data.json').api.find((c) => c.id === id);
 }
@@ -60,7 +68,9 @@ module.exports = {
   getStaticCustomer,
   getAssessmentBilling,
   getInvalidLoginCase,
+  getInvalidRegistrationCase,
   getNegativeApiCase,
   getBoundaryCart,
+  getSearchTerm,
   loadJson,
 };

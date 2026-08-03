@@ -7,7 +7,7 @@ test.describe('Cart Smoke @Smoke', () => {
     await uiFlows.addFirstProductToCart();
 
     const checkout = pages.checkoutPage();
-    await checkout.open();
+    await checkout.openWithItems();
 
     await expect(page.getByTestId('product-title').first()).toBeVisible();
     expect(await checkout.hasCheckoutLineItems()).toBeTruthy();

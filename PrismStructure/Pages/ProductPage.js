@@ -38,9 +38,57 @@ class ProductPage extends BasePage {
     }
   }
 
+  async isAvailableForCart() {
+    if (await this.isOutOfStock()) {
+      return false;
+    }
+
+    try {
+      await this.addToCartButton.waitFor({ state: 'visible', timeout: 3000 });
+      await this.page.waitForFunction(
+        () => {
+          const btn = document.querySelector('[data-test="add-to-cart"]');
+          return btn && !btn.disabled;
+        },
+        { timeout: 2000 }
+      );
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  async waitUntilAddToCartEnabled() {
+    await this.addToCartButton.waitFor({ state: 'visible', timeout: 15_000 });
+    await this.page.waitForFunction(
+      () => {
+        const btn = document.querySelector('[data-test="add-to-cart"]');
+        return btn && !btn.disabled;
+      },
+      { timeout: 15_000 }
+    );
+  }
+
+  async canAddToCart() {
+    if (await this.isOutOfStock()) {
+      return false;
+    }
+    try {
+      await this.waitUntilAddToCartEnabled();
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   async addToCart(quantity) {
     await this.page.waitForURL(/\/product\//);
-    await this.addToCartButton.waitFor({ state: 'visible' });
+
+    if (await this.isOutOfStock()) {
+      throw new Error('Product is out of stock');
+    }
+
+    await this.waitUntilAddToCartEnabled();
 
     if (quantity !== undefined) {
       await this.setQuantity(quantity);

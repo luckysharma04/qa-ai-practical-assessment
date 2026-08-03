@@ -23,7 +23,20 @@ class CheckoutPage extends BasePage {
   async open() {
     await this.goto(ROUTES.checkout);
     await this.waitForNetworkIdle();
+  }
+
+  async openWithItems() {
+    await this.open();
     await this.productTitle.first().waitFor({ state: 'visible', timeout: 20_000 });
+  }
+
+  async openEmpty() {
+    await this.open();
+    await this.page.waitForTimeout(1000);
+  }
+
+  async isCartEmpty() {
+    return (await this.productTitle.count()) === 0;
   }
 
   async clickProceed(stepLocator) {
@@ -82,8 +95,16 @@ class CheckoutPage extends BasePage {
   }
 
   async selectCashOnDelivery() {
-    await this.paymentMethodSelect.waitFor({ state: 'visible', timeout: 15_000 });
-    await this.paymentMethodSelect.selectOption(PAYMENT_METHOD.cashOnDelivery);
+    const paymentVisible = await this.paymentMethodSelect
+      .waitFor({ state: 'visible', timeout: 10_000 })
+      .then(() => true)
+      .catch(() => false);
+
+    if (paymentVisible) {
+      await this.paymentMethodSelect.selectOption(PAYMENT_METHOD.cashOnDelivery);
+    } else {
+      await this.paymentMethodSelect.selectOption(PAYMENT_METHOD.cashOnDelivery, { force: true });
+    }
     await this.clickEnabledProceed();
   }
 
@@ -99,6 +120,36 @@ class CheckoutPage extends BasePage {
     );
   }
 
+  /** Single confirm — used for negative invoice scenarios. */
+  async confirmInvoiceOnce() {
+    await this.goToConfirmStep();
+    await this.clickFinishButton();
+    await this.page.waitForTimeout(1000);
+  }
+
+  async isProceedDisabled(stepLocator) {
+    return stepLocator.isDisabled();
+  }
+
+  async getLineItemQuantityValue(index = 0) {
+    const qtyInput = this.byTestId('product-quantity').nth(index);
+    return qtyInput.inputValue();
+  }
+
+  async setLineItemQuantity(index, quantity) {
+    const qtyInput = this.byTestId('product-quantity').nth(index);
+    await qtyInput.fill(String(quantity));
+    await qtyInput.press('Tab');
+    await this.page.waitForTimeout(500);
+  }
+
+  async clickFinishButton() {
+    await this.page.evaluate(() => {
+      const finish = document.querySelector('[data-test="finish"]');
+      if (finish && !finish.disabled) finish.click();
+    });
+  }
+
   /** Assessment: invoice requires two Confirm/Finish actions. */
   async confirmInvoiceTwice() {
     await this.goToConfirmStep();
@@ -108,13 +159,10 @@ class CheckoutPage extends BasePage {
       { timeout: 20_000 }
     );
 
-    await this.finishButton.click({ force: true });
+    await this.clickFinishButton();
     await invoiceResponse.catch(() => null);
     await this.page.waitForTimeout(600);
-
-    if (await this.finishButton.isVisible() && !(await this.finishButton.isDisabled())) {
-      await this.finishButton.click({ force: true });
-    }
+    await this.clickFinishButton();
     await this.waitForNetworkIdle();
   }
 
