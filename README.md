@@ -62,7 +62,7 @@ See also: [`PrismStructure/FRAMEWORK.md`](./PrismStructure/FRAMEWORK.md) and [`P
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/luckysharma04/qa-ai-practical-assessment
 cd qa-ai-practical-assessment
 
 # Install dependencies (root + PrismStructure via postinstall)
