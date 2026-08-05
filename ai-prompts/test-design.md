@@ -5,7 +5,7 @@ Record of Cursor AI prompts for test scenario design, manual cases, automation m
 **Application:** Practice Software Testing Toolshop v5.0  
 **Date:** 03 August 2026
 
-**Mapped artifacts:** `FunctionalTestCase/FunctionalTestCase.csv`, `RTM.md`, `PrismStructure/Tests/`, `PrismStructure/API/tests/`
+**Mapped artifacts:** `FunctionalTestCase.csv`, `RTM.md`, `PrismStructure/Tests/`, `PrismStructure/API/tests/`
 
 ---
 
@@ -159,7 +159,7 @@ Split: **3 Smoke + 5 Regression = 8** (within 5–8 limit).
 ### Validation
 
 - Documented in `test-suite-scope.md` as compliant.
-- File path: `FunctionalTestCase/FunctionalTestCase.csv`.
+- File path: `FunctionalTestCase.csv` (repository root).
 - Each consolidated case preserves highest-risk themes from expanded drafts.
 
 ---

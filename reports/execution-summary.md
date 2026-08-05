@@ -4,7 +4,7 @@
 **Environment:** https://practicesoftwaretesting.com / https://api.practicesoftwaretesting.com  
 **Executed by:** Lucky Sharma
 
-## Manual Tests (`FunctionalTestCase/FunctionalTestCase.csv`)
+## Manual Tests (`FunctionalTestCase.csv`)
 
 | Tier | Total | Passed | Failed | Not Run |
 |------|-------|--------|--------|---------|
@@ -23,10 +23,10 @@
 
 | Tier | Total | Passed | Failed |
 |------|-------|--------|--------|
-| @Smoke | 7 | 7 | 0 |
+| @Smoke | 3 | 3 | 0 |
 | @Regression | 5 | 5 | 0 |
 
-**UI smoke specs:** TC-UI-SM-LOGIN, TC-UI-SM-CART, TC-UI-SM-CHECKOUT, TC-UI-SM-INVOICE, TC-UI-SM-LOGOUT, TC-UI-SM-REG, TC-UI-SM-SEARCH — all passed (`npm run test:smoke`, ~4.1 min).
+**UI smoke specs:** TC-UI-SM-001 (catalog), TC-UI-SM-002 (login), TC-UI-SM-003 (E2E purchase) — all passed (`npm run test:smoke`, ~6 tests UI+API).
 
 ## API Automation (`PrismStructure/API/tests`)
 
@@ -39,7 +39,7 @@
 
 | Command | Result | Duration (approx.) |
 |---------|--------|------------------|
-| `npm run test:smoke` | 10/10 passed (7 UI + 3 API) | ~4.1 min |
+| `npm run test:smoke` | 6/6 passed (3 UI + 3 API) | ~3 min |
 | `npm run test:regression` | 10/10 passed (5 UI + 5 API) | ~3.7 min |
 
 ## Totals
@@ -47,9 +47,9 @@
 | Layer | Total | Passed | Failed |
 |-------|-------|--------|--------|
 | Manual | 8 | 8 | 0 |
-| UI automation | 12 | 12 | 0 |
+| UI automation | 8 | 8 | 0 |
 | API automation | 8 | 8 | 0 |
-| **All tiers** | **28** | **28** | **0** |
+| **All tiers** | **24** | **24** | **0** |
 
 ## Evidence
 
@@ -62,6 +62,6 @@
 ## Notes
 
 - Manual suite: all 8 cases marked **Passed** in `FunctionalTestCase.csv`; key smoke flows backed by screenshots above.
-- Smoke automation: **10/10 passed**.
+- Smoke automation: **6/6 passed** (3 UI + 3 API).
 - Regression automation: **10/10 passed**.
 - RTM automation statuses: **Passed** in `RTM.md` and `RTM.csv`.

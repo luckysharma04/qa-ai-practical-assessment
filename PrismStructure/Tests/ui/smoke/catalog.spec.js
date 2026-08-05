@@ -4,8 +4,8 @@ const { expectProductCatalog, expectProductSearchResults } = require('../../../U
 
 const productsData = require(path.join(__dirname, '../../../../test-data/products.json'));
 
-test.describe('Product Search Smoke @Smoke @UI', () => {
-  test('TC-UI-SM-SEARCH — search returns product results', async ({ homePage, page }) => {
+test.describe('Catalog Smoke @Smoke @UI', () => {
+  test('TC-UI-SM-001 — home catalog loads and search returns products', async ({ homePage, page }) => {
     test.setTimeout(90_000);
     const searchTerm = productsData.searchTerms.valid[1];
 

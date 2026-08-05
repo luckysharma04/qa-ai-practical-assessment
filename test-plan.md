@@ -596,7 +596,7 @@ For this assessment, defects are tracked in a **lightweight log** (markdown tabl
 | D1 | Requirement analysis | `project-info.md` | Phase 1 |
 | D2 | Risk analysis | `qa-risk-analysis.md` | Phase 1 |
 | D3 | Test plan | `test-plan.md` | Phase 1 |
-| Manual test suite | `FunctionalTestCase/FunctionalTestCase.csv` | Phase 2 |
+| Manual test suite | `FunctionalTestCase.csv` | Phase 2 |
 | D5 | AI prompt history — requirements | `ai-prompts/requirements-and-planning.md` | Phase 1–2 |
 | D6 | AI prompt history — test design | `ai-prompts/test-design.md` | Phase 2 |
 | D7 | AI prompt history — test data | `ai-prompts/test-data.md` | Phase 2 |

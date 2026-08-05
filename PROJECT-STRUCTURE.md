@@ -9,8 +9,7 @@ Complete repository layout aligned with the **QA AI Capability Exercise** submis
 ```
 qa-ai-practical-assessment/
 │
-├── FunctionalTestCase/                 # Manual functional test suite
-│   └── FunctionalTestCase.csv
+├── FunctionalTestCase.csv              # Manual functional test suite (root)
 │
 ├── PrismStructure/                     # Playwright + Prism (UI + API + runtime reports)
 │   ├── Pages/                          # UI Page Objects
@@ -66,7 +65,7 @@ qa-ai-practical-assessment/
 
 ## Folder Explanations
 
-### `FunctionalTestCase/`
+### `FunctionalTestCase.csv` (repository root)
 
 **Purpose:** **Manual functional testing** deliverable required by the assessment.
 
@@ -74,7 +73,7 @@ qa-ai-practical-assessment/
 |------|-------------|
 | `FunctionalTestCase.csv` | Manual test cases with steps, expected results, Smoke/Regression, Positive/Negative/Edge, execution Status |
 
-**Why separate folder:** Keeps manual artifacts distinct from automation; matches assessment naming `FunctionalTestCase (.csv)`.
+**Location:** Repository root per assessment tree (`FunctionalTestCase (.csv)`).
 
 **Compliance:** 8 cases total (3 Smoke + 5 Regression) within the 5–8 manual limit.
 
@@ -190,7 +189,7 @@ Delegates to `PrismStructure/package.json` via `--prefix PrismStructure`.
 
 | Required item | Path | ✓ |
 |---------------|------|---|
-| FunctionalTestCase | `FunctionalTestCase/FunctionalTestCase.csv` | |
+| FunctionalTestCase | `FunctionalTestCase.csv` | |
 | PrismStructure | `PrismStructure/` | |
 | project-info.md | `project-info.md` | |
 | readme.md | `README.md` | |

@@ -161,7 +161,7 @@ Consolidated seven entries above documenting the automation hardening and docume
 | Requirement analysis | `project-info.md` | Complete |
 | Risk analysis | `qa-risk-analysis.md` | Complete |
 | Test plan | `test-plan.md` | Complete |
-| Manual cases (8) | `FunctionalTestCase/FunctionalTestCase.csv` | Complete |
+| Manual cases (8) | `FunctionalTestCase.csv` | Complete |
 | RTM | `RTM.md` / `RTM.csv` | Complete |
 | Framework | `PrismStructure/` | Complete |
 | UI automation | 12 specs (`@Smoke @UI` / `@Regression @UI`) | Complete |

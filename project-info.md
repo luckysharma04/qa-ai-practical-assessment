@@ -23,8 +23,8 @@ This submission validates the **Practice Software Testing Toolshop** — a B2C e
 
 Deliverables include:
 
-- **8 manual functional test cases** (3 Smoke + 5 Regression) in `FunctionalTestCase/FunctionalTestCase.csv`
-- **12 UI automation specs** (7 Smoke + 5 Regression) in `PrismStructure/Tests/ui/`
+- **8 manual functional test cases** (3 Smoke + 5 Regression) in `FunctionalTestCase.csv`
+- **8 UI automation specs** (3 Smoke + 5 Regression) in `PrismStructure/Tests/ui/`
 - **8 API automation specs** (3 Smoke + 5 Regression) in `PrismStructure/API/tests/`
 - Supporting artifacts: test plan, risk analysis, RTM, AI prompt history, execution reports, and README
 
@@ -269,7 +269,7 @@ Full register: `qa-risk-analysis.md`.
 | Type | Smoke | Regression | Total | Status |
 |------|-------|------------|-------|--------|
 | Manual | 3 | 5 | 8 | `FunctionalTestCase.csv` |
-| UI automation | 7 | 5 | 12 | `PrismStructure/Tests/ui/` |
+| UI automation | 3 | 5 | 8 | `PrismStructure/Tests/ui/` |
 | API automation | 3 | 5 | 8 | `PrismStructure/API/tests/` |
 
 Manual cases **TC-M-001–008** map to UI specs **TC-UI-SM-*** / **TC-UI-RG-*** and API specs **TC-API-SM-*** / **TC-API-RG-*** via `RTM.md`.
@@ -619,7 +619,7 @@ This workflow is designed to transfer to production QA engagements with minimal 
 
 | Layer | Specs | Coverage |
 |-------|-------|----------|
-| UI (7) | Login, registration, search, cart, checkout, invoice, logout | Critical purchase path |
+| UI (3) | Catalog, login, E2E purchase (cart → COD → invoice) | Critical purchase path |
 | API (3) | Products, login token, E2E register→invoice | Contract health + E2E chain |
 
 ### @Regression

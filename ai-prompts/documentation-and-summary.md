@@ -20,13 +20,13 @@ Created root `README.md` with prerequisites, setup (`npm install`, Playwright Ch
 
 | Edit | Detail |
 |------|--------|
-| FunctionalTestCase path | Corrected to `FunctionalTestCase/FunctionalTestCase.csv` (not root-level CSV) |
+| FunctionalTestCase path | `FunctionalTestCase.csv` at repository root (per assessment tree) |
 | Automation counts | Updated from “planned” to actual spec counts as suites were built |
 | `postinstall` behavior | Documented that root `npm install` also installs `PrismStructure` dependencies |
 
 ### Reason for edits
 
-- Assessment folder naming requires manual cases inside `FunctionalTestCase/`.
+- Assessment required structure places `FunctionalTestCase.csv` at repository root.
 - README must reflect **delivered** automation, not placeholders, for evaluator trust.
 - Evaluators run `npm install` from root only — postinstall must be explicit to avoid “module not found” errors.
 

@@ -3,8 +3,8 @@ const { defaultCustomer } = require('../../../Data/users');
 const { getAssessmentBilling } = require('../../../Utils/dataGenerator');
 const { expectInvoiceListPage } = require('../../../Utils/assertions');
 
-test.describe('Invoice Smoke @Smoke @UI', () => {
-  test('TC-UI-SM-INVOICE — generate invoice and verify My Invoices', async ({
+test.describe('E2E Purchase Smoke @Smoke @UI', () => {
+  test('TC-UI-SM-003 — cart COD checkout double-confirm invoice and My Invoices', async ({
     uiFlows,
     pages,
     page,

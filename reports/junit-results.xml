@@ -1,76 +1,76 @@
-<testsuites id="" name="" tests="10" failures="0" skipped="0" errors="0" time="219.338511">
-<testsuite name="Tests\ui\regression\auth-negative.spec.js" timestamp="2026-08-03T16:40:20.306Z" hostname="ui-regression" tests="1" failures="0" skipped="0" time="22.489" errors="0">
-<testcase name="Auth Negative Regression @Regression @UI › TC-UI-RG-004 — invalid login and duplicate registration are rejected" classname="Tests\ui\regression\auth-negative.spec.js" time="22.489">
+<testsuites id="" name="" tests="10" failures="0" skipped="0" errors="0" time="140.352467">
+<testsuite name="Tests\ui\regression\auth-negative.spec.js" timestamp="2026-08-05T05:33:35.630Z" hostname="ui-regression" tests="1" failures="0" skipped="0" time="6.815" errors="0">
+<testcase name="Auth Negative Regression @Regression @UI › TC-UI-RG-004 — invalid login and duplicate registration are rejected" classname="Tests\ui\regression\auth-negative.spec.js" time="6.815">
 </testcase>
 </testsuite>
-<testsuite name="Tests\ui\regression\catalog-cart.spec.js" timestamp="2026-08-03T16:40:20.306Z" hostname="ui-regression" tests="1" failures="0" skipped="0" time="89.698" errors="0">
-<testcase name="Catalog Cart Regression @Regression @UI › TC-UI-RG-002 — search filter multi-item cart and quantity update" classname="Tests\ui\regression\catalog-cart.spec.js" time="89.698">
+<testsuite name="Tests\ui\regression\catalog-cart.spec.js" timestamp="2026-08-05T05:33:35.630Z" hostname="ui-regression" tests="1" failures="0" skipped="0" time="45.564" errors="0">
+<testcase name="Catalog Cart Regression @Regression @UI › TC-UI-RG-002 — search filter multi-item cart and quantity update" classname="Tests\ui\regression\catalog-cart.spec.js" time="45.564">
 </testcase>
 </testsuite>
-<testsuite name="Tests\ui\regression\checkout-negative.spec.js" timestamp="2026-08-03T16:40:20.306Z" hostname="ui-regression" tests="1" failures="0" skipped="0" time="54.695" errors="0">
-<testcase name="Checkout Negative Regression @Regression @UI › TC-UI-RG-005 — empty cart invalid billing and single confirm block checkout" classname="Tests\ui\regression\checkout-negative.spec.js" time="54.695">
+<testsuite name="Tests\ui\regression\checkout-negative.spec.js" timestamp="2026-08-05T05:33:35.630Z" hostname="ui-regression" tests="1" failures="0" skipped="0" time="48.038" errors="0">
+<testcase name="Checkout Negative Regression @Regression @UI › TC-UI-RG-005 — empty cart invalid billing and single confirm block checkout" classname="Tests\ui\regression\checkout-negative.spec.js" time="48.038">
 </testcase>
 </testsuite>
-<testsuite name="Tests\ui\regression\registration-profile.spec.js" timestamp="2026-08-03T16:40:20.306Z" hostname="ui-regression" tests="1" failures="0" skipped="0" time="16.407" errors="0">
-<testcase name="Registration Profile Regression @Regression @UI › TC-UI-RG-001 — register new user and verify profile details" classname="Tests\ui\regression\registration-profile.spec.js" time="16.407">
+<testsuite name="Tests\ui\regression\registration-profile.spec.js" timestamp="2026-08-05T05:33:35.630Z" hostname="ui-regression" tests="1" failures="0" skipped="0" time="8.632" errors="0">
+<testcase name="Registration Profile Regression @Regression @UI › TC-UI-RG-001 — register new user and verify profile details" classname="Tests\ui\regression\registration-profile.spec.js" time="8.632">
 </testcase>
 </testsuite>
-<testsuite name="Tests\ui\regression\session.spec.js" timestamp="2026-08-03T16:40:20.306Z" hostname="ui-regression" tests="1" failures="0" skipped="0" time="13.712" errors="0">
-<testcase name="Session Regression @Regression @UI › TC-UI-RG-003 — login establishes session and logout blocks protected routes" classname="Tests\ui\regression\session.spec.js" time="13.712">
+<testsuite name="Tests\ui\regression\session.spec.js" timestamp="2026-08-05T05:33:35.630Z" hostname="ui-regression" tests="1" failures="0" skipped="0" time="11.794" errors="0">
+<testcase name="Session Regression @Regression @UI › TC-UI-RG-003 — login establishes session and logout blocks protected routes" classname="Tests\ui\regression\session.spec.js" time="11.794">
 </testcase>
 </testsuite>
-<testsuite name="API\tests\regression\auth-negative.spec.js" timestamp="2026-08-03T16:40:20.306Z" hostname="api-regression" tests="1" failures="0" skipped="0" time="1.397" errors="0">
-<testcase name="API Auth Negative Regression @Regression @API › TC-API-RG-003 — missing and invalid bearer token rejected" classname="API\tests\regression\auth-negative.spec.js" time="1.397">
+<testsuite name="API\tests\regression\auth-negative.spec.js" timestamp="2026-08-05T05:33:35.630Z" hostname="api-regression" tests="1" failures="0" skipped="0" time="1.083" errors="0">
+<testcase name="API Auth Negative Regression @Regression @API › TC-API-RG-003 — missing and invalid bearer token rejected" classname="API\tests\regression\auth-negative.spec.js" time="1.083">
 </testcase>
 </testsuite>
-<testsuite name="API\tests\regression\cart.spec.js" timestamp="2026-08-03T16:40:20.306Z" hostname="api-regression" tests="1" failures="0" skipped="0" time="4.607" errors="0">
-<testcase name="API Cart Regression @Regression @API › TC-API-RG-002 — add update and verify cart via GET /carts/{id}" classname="API\tests\regression\cart.spec.js" time="4.607">
+<testsuite name="API\tests\regression\cart.spec.js" timestamp="2026-08-05T05:33:35.630Z" hostname="api-regression" tests="1" failures="0" skipped="0" time="3.733" errors="0">
+<testcase name="API Cart Regression @Regression @API › TC-API-RG-002 — add update and verify cart via GET /carts/{id}" classname="API\tests\regression\cart.spec.js" time="3.733">
 <system-out>
 <![CDATA[[API] POST /users/login → 200
 [API] POST /carts → 201
 [API] GET /products → 200
-[API] POST /carts/01kz485vawt1v2rmmz63k25re2 → 200
-[API] POST /carts/01kz485vawt1v2rmmz63k25re2 → 200
-[API] GET /carts/01kz485vawt1v2rmmz63k25re2 → 200
-[API] DELETE /carts/01kz485vawt1v2rmmz63k25re2 → 204
+[API] POST /carts/01kz86qayh1afjgq6z22png2cy → 200
+[API] POST /carts/01kz86qayh1afjgq6z22png2cy → 200
+[API] GET /carts/01kz86qayh1afjgq6z22png2cy → 200
+[API] DELETE /carts/01kz86qayh1afjgq6z22png2cy → 204
 ]]>
 </system-out>
 <system-err>
-<![CDATA[(node:32852) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+<![CDATA[(node:37256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
 ]]>
 </system-err>
 </testcase>
 </testsuite>
-<testsuite name="API\tests\regression\invoice-negative.spec.js" timestamp="2026-08-03T16:40:20.306Z" hostname="api-regression" tests="1" failures="0" skipped="0" time="5.416" errors="0">
-<testcase name="API Invoice Negative Regression @Regression @API › TC-API-RG-004 — invalid invoice payloads are rejected" classname="API\tests\regression\invoice-negative.spec.js" time="5.416">
+<testsuite name="API\tests\regression\invoice-negative.spec.js" timestamp="2026-08-05T05:33:35.630Z" hostname="api-regression" tests="1" failures="0" skipped="0" time="4.856" errors="0">
+<testcase name="API Invoice Negative Regression @Regression @API › TC-API-RG-004 — invalid invoice payloads are rejected" classname="API\tests\regression\invoice-negative.spec.js" time="4.856">
 <system-out>
 <![CDATA[[API] POST /users/login → 200
 [API] POST /carts → 201
 [API] GET /products → 200
-[API] POST /carts/01kz485zqyv4p5q4kkz8smr57m → 200
+[API] POST /carts/01kz86qen2emsanmfzxsrgs072 → 200
 [API] POST /invoices → 201
-[API] DELETE /carts/01kz485zqyv4p5q4kkz8smr57m → 204
+[API] DELETE /carts/01kz86qen2emsanmfzxsrgs072 → 204
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="API\tests\regression\invoices.spec.js" timestamp="2026-08-03T16:40:20.306Z" hostname="api-regression" tests="1" failures="0" skipped="0" time="4.16" errors="0">
-<testcase name="API Invoices Regression @Regression @API › TC-API-RG-005 — list invoices after COD order" classname="API\tests\regression\invoices.spec.js" time="4.16">
+<testsuite name="API\tests\regression\invoices.spec.js" timestamp="2026-08-05T05:33:35.630Z" hostname="api-regression" tests="1" failures="0" skipped="0" time="4.862" errors="0">
+<testcase name="API Invoices Regression @Regression @API › TC-API-RG-005 — list invoices after COD order" classname="API\tests\regression\invoices.spec.js" time="4.862">
 <system-out>
 <![CDATA[[API] POST /users/login → 200
 [API] POST /carts → 201
 [API] GET /products → 200
-[API] POST /carts/01kz4865253sb4b60cztttb9yz → 200
+[API] POST /carts/01kz86qmb8rrydbx7mfab60g2e → 200
 [API] POST /invoices → 201
 [API] GET /invoices → 200
-[API] DELETE /carts/01kz4865253sb4b60cztttb9yz → 204
+[API] DELETE /carts/01kz86qmb8rrydbx7mfab60g2e → 204
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="API\tests\regression\register.spec.js" timestamp="2026-08-03T16:40:20.306Z" hostname="api-regression" tests="1" failures="0" skipped="0" time="1.502" errors="0">
-<testcase name="API Registration Regression @Regression @API › TC-API-RG-001 — POST /users/register creates user" classname="API\tests\regression\register.spec.js" time="1.502">
+<testsuite name="API\tests\regression\register.spec.js" timestamp="2026-08-05T05:33:35.630Z" hostname="api-regression" tests="1" failures="0" skipped="0" time="1.277" errors="0">
+<testcase name="API Registration Regression @Regression @API › TC-API-RG-001 — POST /users/register creates user" classname="API\tests\regression\register.spec.js" time="1.277">
 <system-out>
 <![CDATA[[API] POST /users/register → 201
 [API] POST /users/login → 200

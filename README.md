@@ -15,7 +15,7 @@ Manual functional testing and Playwright automation (UI + API) for the **Practic
 This repository is a complete QA assessment deliverable covering:
 
 - **Manual functional tests** — 8 cases (3 Smoke + 5 Regression) in CSV format
-- **UI automation** — 12 Playwright specs (7 Smoke + 5 Regression) with Page Object Model
+- **UI automation** — 8 Playwright specs (3 Smoke + 5 Regression) with Page Object Model
 - **API automation** — 8 Playwright API specs (3 Smoke + 5 Regression) using `APIRequestContext`
 - **Supporting artifacts** — test plan, risk analysis, RTM, AI prompt history, execution reports
 
@@ -83,10 +83,10 @@ All test commands below can be run from the **repository root** without entering
 Smoke tests are fast health checks tagged `@Smoke` (UI + API).
 
 ```bash
-# All smoke tests (UI + API) — 10 tests
+# All smoke tests (UI + API) — 6 tests
 npm run test:smoke
 
-# UI smoke only — 7 tests
+# UI smoke only — 3 tests
 npm run test:ui:smoke
 
 # API smoke only — 3 tests
@@ -95,13 +95,9 @@ npm run test:api:smoke
 
 | UI Smoke | Test ID |
 |----------|---------|
-| Login | TC-UI-SM-LOGIN |
-| Registration | TC-UI-SM-REG |
-| Product search | TC-UI-SM-SEARCH |
-| Add to cart | TC-UI-SM-CART |
-| Checkout (COD) | TC-UI-SM-CHECKOUT |
-| Invoice | TC-UI-SM-INVOICE |
-| Logout | TC-UI-SM-LOGOUT |
+| Catalog + search | TC-UI-SM-001 |
+| Login | TC-UI-SM-002 |
+| E2E purchase (cart, COD, invoice) | TC-UI-SM-003 |
 
 | API Smoke | Test ID |
 |-----------|---------|
@@ -169,8 +165,7 @@ npm run test:api:regression
 
 ```
 qa-ai-practical-assessment/
-├── FunctionalTestCase/              # Manual test cases (CSV)
-│   └── FunctionalTestCase.csv
+├── FunctionalTestCase.csv           # Manual test cases (CSV, root)
 ├── PrismStructure/                  # Playwright automation framework
 │   ├── API/
 │   │   ├── clients/                 # ApiClient (APIRequestContext)
